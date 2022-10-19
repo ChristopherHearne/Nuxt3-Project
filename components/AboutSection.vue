@@ -29,6 +29,7 @@ export default {
   background: #1a1b21;
   position: relative;
   display: block;
+  max-height: 210px; 
 }
 
 .about--container h3 {
@@ -47,6 +48,6 @@ export default {
 }
 
 .text--container {
-  padding: 20px 40px 40px 40px;
+  padding: 5px 40px 40px 40px;
 }
 </style>
