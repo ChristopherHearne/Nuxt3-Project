@@ -6,7 +6,7 @@
       <FooterSection :profile="profile" />
     </div>
     <div class="github-container">
-      <GitHubSection :githubRepos="repos" :languages="languagesPerRepo" />
+      <GitHubSection :githubRepos="repos" />
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@ const populateEndpoint = async (urls) => {
 const popEndpoint = async (url) => {
   const results = await Promise.resolve(fetch(url, {
     headers: {
-      authorization: `token${runTimeConfig.AUTH_TOKEN_KEY}`
+      // 'authorization': `token ${runTimeConfig.AUTH_TOKEN_KEY}`
     }
   }).then(response => response.json()))
   return results
@@ -40,7 +40,7 @@ const { data: profile } = await useFetch(
 const { data: gitHubRepos} = await useFetch(
   "https://api.github.com/users/ChristopherHearne/repos", {
     headers: {
-      authorization: `token${runTimeConfig.AUTH_TOKEN_KEY}`
+      // authorization: `token ${runTimeConfig.AUTH_TOKEN_KEY}`
     }
   })
 
@@ -78,7 +78,6 @@ watch;
   background-color: #23252c;
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
   font-family: "Inter", sans-serif;
   min-height: 100vh;
   width: auto;
