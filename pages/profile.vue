@@ -6,22 +6,29 @@
       <FooterSection :profile="profile" />
     </div>
     <div class="github-container">
-      <GitHubSection :githubRepos="gitHubRepos" :languages="languagesPerRepo" />
+      <GitHubSection :githubRepos="repos" :languages="languagesPerRepo" />
     </div>
   </div>
 </template>
 
-<script async setup>
-import { getAllDependencies } from 'vue-bundle-renderer/runtime';
+<script setup>
+const urls = ref()
+const languagesPerRepo = ref()
+const repos = ref()
 
-
-const getLanguages = async (req) => {
-  const {data: response} = await useFetch(req)
-  console.log(response)
-  return response
+const populateEndpoint = async (urls) => {
+  const results = await Promise.all(urls.map((url) => fetch(url).then(response => response.json())))
+  return results
 };
 
-let languagesPerRepo = []
+const popEndpoint = async (url) => {
+  const results = await Promise.resolve(fetch(url, {
+    headers: {
+      authorization: 'token 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'
+    }
+  }).then(response => response.json()))
+  return results
+}
 
 const id = 1;
 
@@ -29,25 +36,31 @@ const { data: profile } = await useFetch(
   `http://localhost:11019/api/profileinfo/${id}`
 ); // Figure out proxy for Nuxt3
 
-const { data: gitHubRepos } = await useFetch(
-  "https://api.github.com/users/ChristopherHearne/repos",
-  {
-    onResponse({ request, response }) {
-      return response._data;
-    },
-  }
-);
+const { data: gitHubRepos} = await useFetch(
+  "https://api.github.com/users/ChristopherHearne/repos", {
+    headers: {
+      authorization: 'token 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'
+    }
+  })
+
 
 watch(
   gitHubRepos,
   async (newVal) => {
     if (newVal){
-      const data = JSON.parse(JSON.stringify(newVal));
-      let results = data.map((e) => useFetch(e.languages_url))
-      console.log(results)
-      const datas = await Promise.all(results)
-      languagesPerRepo = datas
-      console.log(languagesPerRepo)
+      repos.value = JSON.parse(JSON.stringify(newVal));
+      repos.value.forEach(async (repo) => {
+        const data = await popEndpoint(repo.languages_url)
+        repo.total_lines = Object.values(data).reduce((a, b) => a + b, 0)
+        repo.languages = Object.entries(data).map(item => {
+          return {
+            language: item[0],
+            lines: item[1],
+            percentage_of_lines: (item[1] / repo.total_lines * 100).toFixed(1)
+          }
+        })
+      })
+      console.log(repos.value)
     }
   },
   {
