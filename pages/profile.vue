@@ -15,6 +15,7 @@
 const urls = ref()
 const languagesPerRepo = ref()
 const repos = ref()
+const runTimeConfig = useRuntimeConfig()
 
 const populateEndpoint = async (urls) => {
   const results = await Promise.all(urls.map((url) => fetch(url).then(response => response.json())))
@@ -24,7 +25,7 @@ const populateEndpoint = async (urls) => {
 const popEndpoint = async (url) => {
   const results = await Promise.resolve(fetch(url, {
     headers: {
-      authorization: 'token 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'
+      authorization: `token${runTimeConfig.AUTH_TOKEN_KEY}`
     }
   }).then(response => response.json()))
   return results
@@ -39,7 +40,7 @@ const { data: profile } = await useFetch(
 const { data: gitHubRepos} = await useFetch(
   "https://api.github.com/users/ChristopherHearne/repos", {
     headers: {
-      authorization: 'token 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'
+      authorization: `token${runTimeConfig.AUTH_TOKEN_KEY}`
     }
   })
 
@@ -60,7 +61,6 @@ watch(
           }
         })
       })
-      console.log(repos.value)
     }
   },
   {
