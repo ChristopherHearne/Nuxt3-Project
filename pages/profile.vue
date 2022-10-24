@@ -12,20 +12,16 @@
 </template>
 
 <script setup>
-const urls = ref()
-const languagesPerRepo = ref()
 const repos = ref()
 const runTimeConfig = useRuntimeConfig()
+const authKey = `Token ${runTimeConfig.AUTH_TOKEN_KEY}`
 
-const populateEndpoint = async (urls) => {
-  const results = await Promise.all(urls.map((url) => fetch(url).then(response => response.json())))
-  return results
-};
 
 const popEndpoint = async (url) => {
   const results = await Promise.resolve(fetch(url, {
+    method: 'GET',
     headers: {
-      // 'authorization': `token ${runTimeConfig.AUTH_TOKEN_KEY}`
+      'Authorization': authKey
     }
   }).then(response => response.json()))
   return results
@@ -40,7 +36,7 @@ const { data: profile } = await useFetch(
 const { data: gitHubRepos} = await useFetch(
   "https://api.github.com/users/ChristopherHearne/repos", {
     headers: {
-      // authorization: `token ${runTimeConfig.AUTH_TOKEN_KEY}`
+      authorization: authKey
     }
   })
 
