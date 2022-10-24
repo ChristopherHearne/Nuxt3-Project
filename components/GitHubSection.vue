@@ -51,6 +51,7 @@ export default {
       if (lang === "HTML") return { backgroundColor: "#e34c26" };
       if (lang === "CSS") return { backgroundColor: "#563d7c" };
       if (lang === "TypeScript") return { backgroundColor: "#3178c6" };
+      if (lang === "C#") return { backgroundColor: "#9b4993" };
     },
   },
 };
