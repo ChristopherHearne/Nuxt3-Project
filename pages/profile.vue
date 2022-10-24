@@ -14,23 +14,23 @@
 <script setup>
 const repos = ref()
 const runTimeConfig = useRuntimeConfig()
-const authKey = `Token ${runTimeConfig.AUTH_TOKEN_KEY}`
+const authKey = `token ${runTimeConfig.AUTH_TOKEN_KEY}`
 
 
 const popEndpoint = async (url) => {
   const results = await Promise.resolve(fetch(url, {
     method: 'GET',
     headers: {
-      'Authorization': authKey
+      // 'Authorization': authKey
     }
   }).then(response => response.json()))
   return results
 }
 
-const id = 1;
+const id = 2;
 
 const { data: profile } = await useFetch(
-  `http://localhost:11019/api/profileinfo/${id}`
+  `http://localhost:10157/api/profile/${id}`
 ); // Figure out proxy for Nuxt3
 
 const { data: gitHubRepos} = await useFetch(

@@ -1,19 +1,19 @@
 <template lang="">
   <div class="info--container">
       <div class="info--text">
-          <img :src="profile.picture" class="info--image"/>
+          <img :src="profile.avatar" class="info--image"/>
           <h2 class="info--header">{{`${profile.firstName} ${profile.lastName}`}}</h2>
-          <h4 class="info--jobtitle">{{profile.jobTitle}}</h4>
-          <span class="info--website">{{profile.websiteLink}}</span>
+          <h4 class="info--jobtitle">{{profile.title}}</h4>
+          <span class="info--website">{{profile.website}}</span>
       </div>
       <div class="info--buttons">
-          <a :href="`mailto:${profile.emailLink}`" target="_blank">
+          <a :href="`mailto:${profile.email}`" target="_blank">
             <button class="info--emailbtn">
             <i class="fa-solid fa-envelope"></i>
                 Email
             </button>   
           </a>
-          <a :href="profile.linkedInLink" target="_blank">
+          <a :href="profile.linkedin" target="_blank">
             <button class="info--linkedbtn">
             <i id="icon--linkedin" class="fa-brands fa-linkedin"></i>
                 LinkedIn

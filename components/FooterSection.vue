@@ -1,10 +1,10 @@
 <template lang="">
   <div class="footer--container">
     <div class="icons--container">
-      <a :href="profile.facebookLink" class="facebook--icon" target="_blank" ><i class="fa-brands fa-facebook-f"></i></a>
-      <a :href="profile.instagramLink" class="instagram--icon" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-      <a :href="profile.linkedInLink" class="linkedin--icon" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-      <a :href="profile.gitHubLink" class="github--icon" target="_blank"><i class="fa-brands fa-github"></i></a>
+      <a :href="profile.facebook" class="facebook--icon" target="_blank" ><i class="fa-brands fa-facebook-f"></i></a>
+      <a :href="profile.instagram" class="instagram--icon" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      <a :href="profile.linkedin" class="linkedin--icon" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+      <a :href="profile.github" class="github--icon" target="_blank"><i class="fa-brands fa-github"></i></a>
     </div>
   </div>
 </template>
