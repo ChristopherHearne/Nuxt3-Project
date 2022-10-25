@@ -65,7 +65,6 @@ watch(
   }
 );
 
-watch;
 </script>
 <style>
 .profile-body {
