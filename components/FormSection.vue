@@ -1,41 +1,73 @@
 <template lang="">
 	<div class="input-container">
 		<span>Firstname</span> 
-		<input placeholder="Firstname..." type="text">
+		<input placeholder="Firstname..." type="text" v-model="profileInfo.firstName"/>
 		<span>Lastname</span> 
-		<input placeholder="Lastname..." type="text">
+		<input placeholder="Lastname..." type="text" v-model="profileInfo.lastName"/>
 		<span>Title</span> 
-		<input placeholder="Title..." type="text">
+		<input placeholder="Title..." type="text" v-model="profileInfo.title"/>
 		<span>Email</span> 
-		<input placeholder="Email..." type="email">
+		<input placeholder="Email..." type="email" v-model="profileInfo.email"/>
 		<span>About you</span> 
-		<input placeholder="About..." type="text">
+		<input placeholder="About..." type="text" v-model="profileInfo.about"/>
 		<span> Your interests</span> 
-		<input placeholder="Interests..." type="text">
+		<input placeholder="Interests..." type="text" v-model="profileInfo.interests"/>
 		<span>Connect your Github Account</span>
 		<div class="github-container">
-			<input placeholder="Your Github Username">
-			<button>Check for repos</button>
+			<input placeholder="Your Github Username" v-model="gitHubUser">
+			<button @click="getRepos">Check for repos</button>
 			<div class="github-message"></div>
 		</div>
 		<span>Your Facebook</span> 
-		<input placeholder="Link to Facebook..." type="url">
+		<input placeholder="Link to Facebook..." type="url" v-model="profileInfo.facebook"/>
 		<span>Your Instagram</span> 
-		<input placeholder="Link to Instagram..." type="url">
+		<input placeholder="Link to Instagram..." type="url" v-model="profileInfo.instagram"/>
 		<span>Your Github</span>
-		<input placeholder="Link to Github..." type="url">
+		<input placeholder="Link to Github..." type="url" v-model="profileInfo.github"/>
 		<span>Your LinkedIn</span>
-		<input placeholder="Link to LinkedIn..." type="url">
+		<input placeholder="Link to LinkedIn..." type="url" v-model="profileInfo.linkedin"/>
 		<span>Your website</span>
-		<input placeholder="Link to website/project..." type="url">
-		<button>Submit</button>
+		<input placeholder="Link to website/project..." type="url" v-model="profileInfo.website"/>
+		<button @click="postProfile">Submit</button>
 		<button>Clear</button>
 	</div>
 </template>
 <script>
+
 export default {
 	name: 'Update',
-	
+	data(){
+		return {
+			profileInfo: {},
+			gitHubUser: null,
+			repos: []
+		}
+	},
+	methods: {
+		async postProfile(){
+			const profileData = {...this.profileInfo}
+			console.log(JSON.stringify(profileData))
+			const postReq = await fetch("http://localhost:10157/api/Profile", {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
+				},
+				mode: 'no-cors', 
+				body: JSON.stringify(profileData)
+			}).catch(err => alert(err))
+		}, 
+		async getRepos(){
+			const response = await fetch(`https://api.github.com/users/${this.gitHubUser}/repos`)
+				.catch(err => alert(err))
+			if (!response.ok){
+				const request = await response.json()
+				alert(`Server responded with ${response.status}: ${request.message} for user ${this.gitHubUser}`)
+			}
+			const results = await response.json()
+			this.repos = results
+		}
+	}
 }
 </script>
 <style scoped>

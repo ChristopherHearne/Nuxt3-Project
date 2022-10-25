@@ -17,20 +17,9 @@ export default defineNuxtConfig({
 	  ],
 	  
 	  // Modules: https://go.nuxtjs.dev/config-modules
-	  modules: [
-	  ],
+	  modules: [],
 	
 	  // Build Configuration: https://go.nuxtjs.dev/config-build
 	  build: {
 	  }, 
-	  vite: {
-		server:{
-			proxy: {
-			  '/api/': {
-				target: 'http://localhost:10157', 
-				changeOrigin: true,
-			  } 
-			},
-		}
-	  }
 })
