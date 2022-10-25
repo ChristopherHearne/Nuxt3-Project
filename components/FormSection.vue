@@ -55,7 +55,8 @@ export default {
 				},
 				mode: 'no-cors', 
 				body: JSON.stringify(profileData)
-			}).catch(err => alert(err))
+			})
+			const results = postReq.json()
 		}, 
 		async getRepos(){
 			const response = await fetch(`https://api.github.com/users/${this.gitHubUser}/repos`)
