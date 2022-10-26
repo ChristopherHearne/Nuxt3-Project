@@ -49,12 +49,12 @@
         v-model="profileInfo.website"
       />
       <button type="submit">Submit</button>
-      <button>Clear</button>
     </form>
+	<button @click="getProfiles">Clear</button>
     <div class="github-container">
       <input placeholder="Your Github Username" v-model="gitHubUser" />
       <button @click="getRepos">Check for repos</button>
-      <div class="github-message"></div>
+      <div class="github-message">{{profiles}}</div>
     </div>
   </div>
 </template>
@@ -66,6 +66,7 @@ export default {
       profileInfo: {},
       gitHubUser: null,
       repos: [],
+	  profiles: [],
     };
   },
   methods: {
@@ -97,6 +98,14 @@ export default {
       const results = await response.json();
       this.repos = results;
     },
+	async getProfiles(){
+		const response = await fetch("http://localhost:10157/api/Profile", {
+			headers: {
+				'Accept': 'application/json'
+			}, 
+		})
+		console.log(response)
+	}
   },
 };
 </script>
@@ -127,12 +136,8 @@ export default {
   width: 190px;
 }
 
-textarea{
-	font-family: 'Inter', sans-serif;
-	padding: 15px; 
-}
-
-button{
-	cursor: pointer; 
+input, textarea, button{
+	font-family: 'Inter', sans-serif; 
+	font-weight: 100; 
 }
 </style>
