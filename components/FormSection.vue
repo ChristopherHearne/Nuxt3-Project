@@ -50,8 +50,8 @@ export default {
 			const postReq = await fetch("http://localhost:10157/api/Profile", {
 				method: 'POST',
 				headers: {
+					'Accept': 'text/plain',
 					'Content-Type': 'application/json',
-					'Accept': 'application/json'
 				},
 				mode: 'no-cors', 
 				body: JSON.stringify(profileData)
