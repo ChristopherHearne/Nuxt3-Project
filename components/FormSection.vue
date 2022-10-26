@@ -104,7 +104,8 @@ export default {
 				'Accept': 'application/json'
 			}, 
 		})
-		console.log(response)
+		const results = await response.json()
+		console.log(results)
 	}
   },
 };
