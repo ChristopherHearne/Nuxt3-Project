@@ -1,12 +1,16 @@
 <template lang="">
   <div class="input-container">
     <form @submit.prevent="handleSubmit" class="input-container">
-      <input
-        placeholder="Profile name..."
-        type="text"
-        v-model="profileInfo.profileName"
-        required
-      />
+      <div class="profile-name">
+        <input
+          :class="{error: error.set}"
+          placeholder="Profile name..."
+          type="text"
+          v-model="profileInfo.profileName"
+          required
+        />
+        <div class="error-msg" v-if="error.set">{{error.message}}</div>
+      </div>
       <input
         placeholder="Firstname..."
         type="text"
@@ -55,11 +59,11 @@
       />
       <button type="submit">Submit</button>
     </form>
-	<button @click="getProfiles">Clear</button>
+    <button @click="getProfiles">Clear</button>
     <div class="github-container">
       <input placeholder="Your Github Username" v-model="gitHubUser" />
       <button @click="getRepos">Check for repos</button>
-      <div class="github-message">{{profiles}}</div>
+      <div class="github-message">{{ profiles }}</div>
     </div>
   </div>
 </template>
@@ -71,24 +75,39 @@ export default {
       profileInfo: {},
       gitHubUser: null,
       repos: [],
-	  profiles: [],
+      profiles: [],
+      error: {
+        set: false,
+        message: null
+      } 
     };
   },
   methods: {
     async handleSubmit() {
       const profileData = { ...this.profileInfo };
-      console.log(profileData)
       var form_data = new FormData();
 
       Object.keys(profileData).forEach((key) =>
         form_data.append(key, profileData[key])
       );
 
-      return await fetch("http://localhost:10157/api/Profile", {
+      const response = await fetch("http://localhost:10157/api/Profile", {
         method: "POST",
-        mode: 'no-cors',
         body: form_data,
-      });
+      }).catch(err => console.log(err));
+      console.log(response)
+      if(!response.ok){
+        const request = await response.json()
+        console.log(`Server responded with ${response.status}: ${request.Error[0]}`)
+        this.error.message = request.Error[0]
+        this.error.set = true
+        console.log(this.error)
+        return
+      }
+
+      const results = await response.json()
+      console.log(`Success: User ${results.profileName} was created with a status of ${response.status}`)
+      return results
     },
     async getRepos() {
       const response = await fetch(
@@ -103,19 +122,22 @@ export default {
       const results = await response.json();
       this.repos = results;
     },
-	async getProfiles(){
-		const response = await fetch("http://localhost:10157/api/Profile", {
-			headers: {
-				'Accept': 'application/json'
-			}, 
-		})
-		const results = await response.json()
-		console.log(results)
-	}
+    async getProfiles() {
+      const response = await fetch("http://localhost:10157/api/Profile", {
+        headers: {
+          Accept: "application/json",
+        },
+      });
+      const results = await response.json();
+      console.log(results);
+    },
   },
 };
 </script>
 <style scoped>
+*{
+  font-family: 'Inter', sans-serif; 
+}
 .input-container {
   width: 50%;
   padding: 15px;
@@ -142,8 +164,28 @@ export default {
   width: 190px;
 }
 
-input, textarea, button{
-	font-family: 'Inter', sans-serif; 
-	font-weight: 100; 
+input,
+textarea,
+button {
+  font-family: "Inter", sans-serif;
+  font-weight: 100;
+}
+
+input{
+  margin-left: 0; 
+}
+
+.error-msg{
+  color: red; 
+  font-size: 15px; 
+  font-weight: 400; 
+}
+
+.error{
+  border-color: red; 
+}
+
+.profile-name{
+  display: inline-block;
 }
 </style>
