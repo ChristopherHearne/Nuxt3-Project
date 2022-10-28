@@ -57,13 +57,14 @@
         type="url"
         v-model="profileInfo.website"
       />
-      <button type="submit">Submit</button>
+      <button type="submit">Create Profile</button>
+      <div v-if="post.success" class="success-msg">{{post.message}}</div>
     </form>
-    <button @click="getProfiles">Clear</button>
+    <button @click="getProfiles">Clear Inputs</button>
     <div class="github-container">
       <input placeholder="Your Github Username" v-model="gitHubUser" />
       <button @click="getRepos">Check for repos</button>
-      <div class="github-message">{{ profiles }}</div>
+      <div class="github-message"></div>
     </div>
   </div>
 </template>
@@ -79,7 +80,11 @@ export default {
       error: {
         set: false,
         message: null
-      } 
+      },
+      post: {
+        success: false,
+        message: null,
+      }
     };
   },
   methods: {
@@ -95,7 +100,7 @@ export default {
         method: "POST",
         body: form_data,
       }).catch(err => console.log(err));
-      console.log(response)
+
       if(!response.ok){
         const request = await response.json()
         console.log(`Server responded with ${response.status}: ${request.Error[0]}`)
@@ -107,6 +112,8 @@ export default {
 
       const results = await response.json()
       console.log(`Success: User ${results.profileName} was created with a status of ${response.status}`)
+      this.post.success = true
+      this.post.message = `${results.profileName} was created and added to the database successfully`
       return results
     },
     async getRepos() {
@@ -123,11 +130,7 @@ export default {
       this.repos = results;
     },
     async getProfiles() {
-      const response = await fetch("http://localhost:10157/api/Profile", {
-        headers: {
-          Accept: "application/json",
-        },
-      });
+      const response = await fetch("http://localhost:10157/api/Profile")
       const results = await response.json();
       console.log(results);
     },
@@ -158,7 +161,7 @@ export default {
 }
 
 .input-container input {
-  margin: 5px;
+  margin: 5px 5px 5px 0;
   font-family: "Inter", sans-serif;
   padding: 8px;
   width: 190px;
@@ -171,8 +174,8 @@ button {
   font-weight: 100;
 }
 
-input{
-  margin-left: 0; 
+button{
+  cursor: pointer;
 }
 
 .error-msg{
@@ -187,5 +190,12 @@ input{
 
 .profile-name{
   display: inline-block;
+}
+
+.success-msg{
+  font-weight: 100; 
+  font-size: 1.5em; 
+  color: lightgreen; 
+  margin: 0 auto; 
 }
 </style>
