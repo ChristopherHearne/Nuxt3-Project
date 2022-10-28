@@ -1,6 +1,12 @@
 <template lang="">
   <div class="input-container">
-    <form @submit-prevent="handleSubmit" class="input-container">
+    <form @submit.prevent="handleSubmit" class="input-container">
+      <input
+        placeholder="Profile name..."
+        type="text"
+        v-model="profileInfo.profileName"
+        required
+      />
       <input
         placeholder="Firstname..."
         type="text"
@@ -13,7 +19,6 @@
       />
       <input placeholder="Title..." type="text" v-model="profileInfo.title" />
       <input placeholder="Email..." type="email" v-model="profileInfo.email" />
-      <input placeholder="About..." type="text" v-model="profileInfo.about" />
       <textarea
         placeholder="Tell us something about you..."
         v-model="profileInfo.about"
@@ -72,7 +77,7 @@ export default {
   methods: {
     async handleSubmit() {
       const profileData = { ...this.profileInfo };
-
+      console.log(profileData)
       var form_data = new FormData();
 
       Object.keys(profileData).forEach((key) =>
@@ -81,7 +86,7 @@ export default {
 
       return await fetch("http://localhost:10157/api/Profile", {
         method: "POST",
-        mode: "no-cors",
+        mode: 'no-cors',
         body: form_data,
       });
     },
