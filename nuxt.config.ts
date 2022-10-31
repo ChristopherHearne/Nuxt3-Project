@@ -7,7 +7,12 @@ export default defineNuxtConfig({
 	  ],
 	  
 	  runtimeConfig: {
-		AUTH_TOKEN_KEY: process.env.AUTH_TOKEN
+		public: {
+			AUTH_TOKEN_KEY: process.env.AUTH_TOKEN,
+			GITHUB_OAUTH_CLIENT_ID: process.env.GITHUB_OAUTH_CLIENT_ID,
+			GITHUB_OAUTH_SECRET: process.env.GITHUB_OAUTH_SECRET,
+			GITHUB_OAUTH_REDIRECT: process.env.GITHUB_OAUTH_REDIRECT_URI,
+		}
 	  },
 	  // Auto import components: https://go.nuxtjs.dev/config-components
 	  components: true,

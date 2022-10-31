@@ -27,12 +27,13 @@ const popEndpoint = async (url) => {
   return results
 }
 
-const id = 2;
+const id = 61;
 
 const { data: profile } = await useFetch(
   `http://localhost:10157/api/profile/${id}`
 ); // Figure out proxy for Nuxt3
 
+console.log(runTimeConfig.GITHUB_OAUTH_CLIENT_ID)
 const { data: gitHubRepos} = await useFetch(
   "https://api.github.com/users/ChristopherHearne/repos", {
     headers: {
