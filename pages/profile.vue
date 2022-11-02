@@ -40,8 +40,7 @@ const { data: gitHubRepos} = await useFetch(
       authorization: authKey
     }
   })
-
-
+  
 watch(
   gitHubRepos,
   async (newVal) => {

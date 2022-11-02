@@ -10,18 +10,23 @@
             <nuxt-link to="/portfolios" class="link">Portfolios</nuxt-link>
           </li>
           <li>
-			<nuxt-link to="/update" class="link">Update</nuxt-link>
+            <nuxt-link to="/my-portfolio" class="link">My Portfolio</nuxt-link>
           </li>
           <li>
-			<nuxt-link to="/profile" class="link">Profile</nuxt-link>
+            <nuxt-link to="/update" class="link">Admin</nuxt-link>
+          </li>
+          <li>
+            <nuxt-link to="/my-profile" class="link">My Profile</nuxt-link>
+          </li>
+          <li>
+            <nuxt-link to="/create-profile" class="link">Create Profile</nuxt-link>
           </li>
         </ul>
       </nav>
     </div>
   </div>
 </template>
-<script>
-</script>
+<script></script>
 <style scoped>
 .nav-sidebar {
   background-color: #161619;
@@ -43,7 +48,7 @@
   font-weight: 100;
   color: #fff;
   font-size: 25px;
-  letter-spacing: -0.08em; 
+  letter-spacing: -0.08em;
   font-style: normal;
   line-height: 30px;
   text-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
@@ -51,13 +56,13 @@
   font-family: "Inter", sans-serif;
   text-underline-offset: 0.4em;
   text-decoration: underline 0.05em transparent;
-  transition: text-decoration-color 1.5s, text-underline-offset 1.5s, color 1s; 
+  transition: text-decoration-color 1.5s, text-underline-offset 1.5s, color 1s;
 }
 
 .nav-container .link:hover {
   text-decoration-color: #fff;
   text-underline-offset: 0.4em;
-  color: #F3BF99; 
+  color: #f3bf99;
   cursor: pointer;
 }
 

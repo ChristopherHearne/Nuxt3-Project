@@ -61,34 +61,10 @@
       <div v-if="post.success" class="success-msg">{{ post.message }}</div>
     </form>
     <button @click="getProfiles">Clear Inputs</button>
-    <div class="github-container">
-      <input placeholder="Your Github Username" v-model="gitHubUser" />
-      <button @click="getGithubURL(from)">
-        <i class="fa-brands fa-github"></i>
-        Connect to Github
-      </button>
-      <div class="github-message"></div>
-    </div>
   </div>
 </template>
 <script setup>
-const runTimeConfig = useRuntimeConfig();
 
-const from = "/";
-
-
-const getGithubURL = (from) => {
-  const rootURL = "https://github.com/login/oauth/authorize";
-  const options = {
-    client_id: runTimeConfig.public.GITHUB_OAUTH_CLIENT_ID,
-    redirect_uri: runTimeConfig.public.GITHUB_OAUTH_REDIRECT,
-    scope: "user:email",
-    state: from,
-  };
-
-  const qs = new URLSearchParams(options);
-  return window.location.assign(`${rootURL}?${qs.toString()}`);
-};
 </script>
 <script>
 export default {
