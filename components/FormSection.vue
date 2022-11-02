@@ -6,7 +6,7 @@
           :class="{ error: error.set }"
           placeholder="Profile name..."
           type="text"
-          v-model="profileInfo.profileName"
+          v-model="activeUser.profileName"
           required
         />
         <div class="error-msg" v-if="error.set">{{ error.message }}</div>
@@ -14,48 +14,48 @@
       <input
         placeholder="Firstname..."
         type="text"
-        v-model="profileInfo.firstName"
+        v-model="activeUser.firstName"
       />
       <input
         placeholder="Lastname..."
         type="text"
-        v-model="profileInfo.lastName"
+        v-model="activeUser.lastName"
       />
-      <input placeholder="Title..." type="text" v-model="profileInfo.title" />
-      <input placeholder="Email..." type="email" v-model="profileInfo.email" />
+      <input placeholder="Title..." type="text" v-model="activeUser.title" />
+      <input placeholder="Email..." type="email" v-model="activeUser.email" />
       <textarea
         placeholder="Tell us something about you..."
-        v-model="profileInfo.about"
+        v-model="activeUser.about"
       ></textarea>
       <textarea
         placeholder="Tell us about your interests..."
-        v-model="profileInfo.interests"
+        v-model="activeUser.interests"
       ></textarea>
-      <!-- <input placeholder="Avatar" type="file" @change="profileInfo.avatar" /> -->
+      <!-- <input placeholder="Avatar" type="file" @change="activeUser.avatar" /> -->
       <input
         placeholder="Link to Facebook..."
         type="url"
-        v-model="profileInfo.facebook"
+        v-model="activeUser.facebook"
       />
       <input
         placeholder="Link to Instagram..."
         type="url"
-        v-model="profileInfo.instagram"
+        v-model="activeUser.instagram"
       />
       <input
         placeholder="Link to Github..."
         type="url"
-        v-model="profileInfo.github"
+        v-model="activeUser.github"
       />
       <input
         placeholder="Link to LinkedIn..."
         type="url"
-        v-model="profileInfo.linkedin"
+        v-model="activeUser.linkedin"
       />
       <input
         placeholder="Link to website/project..."
         type="url"
-        v-model="profileInfo.website"
+        v-model="activeUser.website"
       />
       <button type="submit">Create Profile</button>
       <div v-if="post.success" class="success-msg">{{ post.message }}</div>
@@ -71,7 +71,7 @@ export default {
   name: "Update",
   data() {
     return {
-      profileInfo: {},
+      activeUser: {},
       gitHubUser: null,
       repos: [],
       profiles: [],
@@ -87,14 +87,14 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      const profileData = { ...this.profileInfo };
+      const profileData = { ...this.activeUser };
       var form_data = new FormData();
 
       Object.keys(profileData).forEach((key) =>
         form_data.append(key, profileData[key])
       );
 
-      const response = await fetch("http://localhost:10157/api/Profile", {
+      const response = await fetch("http://localhost:9362/api/Profile", {
         method: "POST",
         body: form_data,
       }).catch((err) => console.log(err));
@@ -116,7 +116,8 @@ export default {
       );
       this.post.success = true;
       this.post.message = `${results.profileName} was created and added to the database successfully`;
-      return results;
+      localStorage.setItem("active_user", JSON.stringify(results))
+      await navigateTo('/my-profile')
     },
     async getRepos() {
       const response = await fetch(
@@ -132,7 +133,7 @@ export default {
       this.repos = results;
     },
     async getProfiles() {
-      const response = await fetch("http://localhost:10157/api/Profile");
+      const response = await fetch("http://localhost:9362/api/Profile");
       const results = await response.json();
       console.log(results);
     },
