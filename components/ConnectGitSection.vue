@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="github-container">
-      <button @click="getGithubURL(from)">
+      <button @click="getGithubURL()">
         <i class="fa-brands fa-github"></i>
         Connect to Github
       </button>
@@ -12,15 +12,16 @@
 <script setup>
 const runTimeConfig = useRuntimeConfig();
 
-const from = "/";
+const user = JSON.parse(localStorage.getItem("active_user"))
+console.log(user);
 
-const getGithubURL = (from) => {
+const getGithubURL = () => {
   const rootURL = "https://github.com/login/oauth/authorize";
   const options = {
     client_id: runTimeConfig.public.GITHUB_OAUTH_CLIENT_ID,
     redirect_uri: runTimeConfig.public.GITHUB_OAUTH_REDIRECT,
     scope: "user:email",
-    state: from,
+    state: user.id, // Extremely bad way of passing the current user to assign token. FIX
   };
 
   const qs = new URLSearchParams(options);
@@ -30,16 +31,30 @@ const getGithubURL = (from) => {
 <script>
 export default {
   props: {
-    activeUser: {}
-  }
-}
+    activeUser: {},
+  },
+  methods: {
+    async getGithubURL() {
+      const rootURL = "https://github.com/login/oauth/authorize";
+      const options = {
+        client_id: runTimeConfig.public.GITHUB_OAUTH_CLIENT_ID,
+        redirect_uri: runTimeConfig.public.GITHUB_OAUTH_REDIRECT,
+        scope: "user:email",
+        state: id, // Extremely bad way of passing the current user to assign token. FIX
+      };
+
+      const qs = new URLSearchParams(options);
+      return window.location.assign(`${rootURL}?${qs.toString()}`);
+    },
+  },
+};
 </script>
 <style scoped>
-.github-container{
-	display: flex;
-	align-items: center; 
-	justify-content: center;
-	margin: 0 auto;
+.github-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
 }
 /* CSS */
 button {

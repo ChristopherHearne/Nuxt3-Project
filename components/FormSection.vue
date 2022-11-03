@@ -31,7 +31,6 @@
         placeholder="Tell us about your interests..."
         v-model="activeUser.interests"
       ></textarea>
-      <!-- <input placeholder="Avatar" type="file" @change="activeUser.avatar" /> -->
       <input
         placeholder="Link to Facebook..."
         type="url"
