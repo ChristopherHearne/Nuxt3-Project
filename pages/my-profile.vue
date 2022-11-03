@@ -1,7 +1,7 @@
 <template>
 	<div class="form-container">
 		<ProfileSection :activeUser="activeUser" />
-		<ConnectGitSection /> 
+		<ConnectGitSection :activeUser="activeUser" /> 
 	</div>
 </template>
 

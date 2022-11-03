@@ -27,6 +27,13 @@ const getGithubURL = (from) => {
   return window.location.assign(`${rootURL}?${qs.toString()}`);
 };
 </script>
+<script>
+export default {
+  props: {
+    activeUser: {}
+  }
+}
+</script>
 <style scoped>
 .github-container{
 	display: flex;
