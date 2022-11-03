@@ -84,8 +84,12 @@ const updateProfile = async (activeUser) => {
       body: form_data,
     }
   );
-  const results = await response.json();
-  return results;
+  if(!response.ok){
+	console.log(`Server responded with a status of ${response.status}: ${response.statusText}`)
+  }
+  if(response.ok && response.status === 204){
+	console.log(`User ${activeUser.profileName} was successfully updated`)
+  }
 };
 </script>
 <script>
