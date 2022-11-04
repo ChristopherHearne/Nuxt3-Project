@@ -12,12 +12,15 @@
 <script setup>
 const runTimeConfig = useRuntimeConfig();
 const getGithubURL = async(id) => {
+  const from = "/"
+  const redirect_uri = encodeURI(`${runTimeConfig.public.GITHUB_OAUTH_REDIRECT}?id=${id}`)
+  console.log(redirect_uri)
   const rootURL = "https://github.com/login/oauth/authorize";
   const options = {
     client_id: runTimeConfig.public.GITHUB_OAUTH_CLIENT_ID,
-    redirect_uri: runTimeConfig.public.GITHUB_OAUTH_REDIRECT,
+    redirect_uri: redirect_uri,
     scope: "user:email",
-    state: id, // Extremely bad way of passing the current user to assign token. FIX
+    state: "/", 
   };
 
   const qs = new URLSearchParams(options);
@@ -31,15 +34,6 @@ export default {
     activeUser: {},
   },
   methods: {
-    // TODO: This needs to be figured out and refactored appropriately: 
-    // 1: Get the access token by looking for the code query string in the api endpoint
-    // 2: Use the response from the github API to return it to the client. Much more effective way of doing it
-    // 3: Then we use the access token to post it to a specific Profile ID, here in the client by calling POST /tokens
-    // 4: That means that when the token is validated and returned from the redirect URI, we can actually start appending the isAuthenticated boolean to the current user. 
-    // 5: Trim the fat in the API by simple using it to return the access token, the saving of that specifik token is then handled by a separate endpoint
-    // 6: Store the runtime config options in variables that can be concatenated in the <a> tag href.
-    // 7: Use state option below to have a dynamic routing to use.
-    // 8: If we proxy our server with our client, we don't run the risk of losing our access token in the local storage (Nuxt3 doesnt seem to have proxy-functionality?)
   },
 };
 </script>
