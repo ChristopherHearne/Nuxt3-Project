@@ -6,7 +6,6 @@
 </template>
 
 <script setup>
-	const activeUser = JSON.parse(localStorage.getItem("active_user"))
 </script>
 
 <style scoped>
