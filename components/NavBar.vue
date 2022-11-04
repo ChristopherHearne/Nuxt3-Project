@@ -16,7 +16,7 @@
             <nuxt-link to="/update" class="link">Admin</nuxt-link>
           </li>
           <li>
-            <nuxt-link to="/my-profile" class="link">My Profile</nuxt-link>
+            <nuxt-link to="/myprofile/info" class="link">My Profile</nuxt-link>
           </li>
           <li>
             <nuxt-link to="/create-profile" class="link">Create Profile</nuxt-link>
