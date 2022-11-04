@@ -63,10 +63,11 @@
   </div>
 </template>
 <script setup>
+import { setCookie, eraseCookie } from '~~/tools/cookieHandler';
 const runTimeConfig = useRuntimeConfig();
 
 const signOut = async () => {
-  localStorage.clear();
+  eraseCookie('active_user')
   await navigateTo("/");
 };
 
@@ -90,7 +91,7 @@ const updateProfile = async (activeUser) => {
   }
   if (response.ok && response.status === 204) {
     console.log(`User ${activeUser.profileName} was successfully updated`);
-    document.cookie = `active_user=${JSON.stringify(activeUser)}`
+    setCookie('active_user', JSON.stringify(activeUser), 1)
   }
 };
 </script>

@@ -115,8 +115,7 @@ export default {
       );
       this.post.success = true;
       this.post.message = `${results.profileName} was created and added to the database successfully`;
-      setCookie('active_user', JSON.stringify(results), 10)
-      console.log(getCookie('active_user'))
+      setCookie('active_user', JSON.stringify(results), 1)
       await navigateTo('/myprofile/info')
     },
     async getRepos() {
