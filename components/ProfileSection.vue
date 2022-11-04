@@ -63,7 +63,6 @@
   </div>
 </template>
 <script setup>
-
 const runTimeConfig = useRuntimeConfig();
 
 const signOut = async () => {
@@ -84,11 +83,14 @@ const updateProfile = async (activeUser) => {
       body: form_data,
     }
   );
-  if(!response.ok){
-	console.log(`Server responded with a status of ${response.status}: ${response.statusText}`)
+  if (!response.ok) {
+    console.log(
+      `Server responded with a status of ${response.status}: ${response.statusText}`
+    );
   }
-  if(response.ok && response.status === 204){
-	console.log(`User ${activeUser.profileName} was successfully updated`)
+  if (response.ok && response.status === 204) {
+    console.log(`User ${activeUser.profileName} was successfully updated`);
+    localStorage.setItem("active_user", JSON.stringify(activeUser))
   }
 };
 </script>

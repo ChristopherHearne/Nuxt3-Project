@@ -65,7 +65,6 @@ export default {
   justify-content: center;
   margin: 0 auto;
 }
-/* CSS */
 button {
   align-items: center;
   background-clip: padding-box;
