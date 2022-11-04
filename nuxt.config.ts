@@ -12,7 +12,8 @@ export default defineNuxtConfig({
 			GITHUB_OAUTH_CLIENT_ID: process.env.GITHUB_OAUTH_CLIENT_ID,
 			GITHUB_OAUTH_SECRET: process.env.GITHUB_OAUTH_SECRET,
 			GITHUB_OAUTH_REDIRECT: process.env.GITHUB_OAUTH_REDIRECT_URI,
-			WEB_API_BASE_URL: process.env.WEB_API_BASE_URL,
+			WEB_API_PROFILES_BASE_URL: process.env.WEB_API_PROFILES_BASE_URL,
+			WEB_API_TOKENS_BASE_URL: process.env.WEB_API_TOKENS_BASE_URL, 
 		}
 	  },
 	  // Auto import components: https://go.nuxtjs.dev/config-components
