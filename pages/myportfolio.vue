@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup> // TODO: Here we'll display the data that we have assigned and created in ConnectGit
 const repos = ref()
 const runTimeConfig = useRuntimeConfig()
 const authKey = `token ${runTimeConfig.AUTH_TOKEN_KEY}`
