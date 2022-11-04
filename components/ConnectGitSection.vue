@@ -19,8 +19,8 @@ const getGithubURL = async(id) => {
   const options = {
     client_id: runTimeConfig.public.GITHUB_OAUTH_CLIENT_ID,
     redirect_uri: redirect_uri,
-    scope: "user:email",
-    state: "/", 
+    scope: "repo",
+    state: "/", // We could use this to store which page we came from and redirect correctly in the API
   };
 
   const qs = new URLSearchParams(options);

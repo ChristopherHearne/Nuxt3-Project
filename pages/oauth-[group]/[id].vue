@@ -20,6 +20,7 @@ const { data: gitHubInfo } = await useFetch(`${tokenBaseURL}/profile`, {
 <style scoped>
 	.form-container{
 		margin: 0 auto; 
+		display: inline-block; 
 	}
 	h1{ 
 		color: #fff;
