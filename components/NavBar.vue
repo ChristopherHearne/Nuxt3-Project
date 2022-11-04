@@ -19,7 +19,7 @@
             <nuxt-link to="/myprofile/info" class="link">My Profile</nuxt-link>
           </li>
           <li>
-            <nuxt-link to="/create-profile" class="link">Create Profile</nuxt-link>
+            <nuxt-link to="/create" class="link">Create Profile</nuxt-link>
           </li>
         </ul>
       </nav>

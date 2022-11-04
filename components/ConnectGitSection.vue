@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="github-container">
-      <button @click="getGithubURL()">
+      <button @click="getGithubURL(activeUser.id)">
         <i class="fa-brands fa-github"></i>
         Connect to Github
       </button>
@@ -12,21 +12,6 @@
 <script setup>
 const runTimeConfig = useRuntimeConfig();
 
-const user = JSON.parse(localStorage.getItem("active_user"))
-console.log(user);
-
-const getGithubURL = () => {
-  const rootURL = "https://github.com/login/oauth/authorize";
-  const options = {
-    client_id: runTimeConfig.public.GITHUB_OAUTH_CLIENT_ID,
-    redirect_uri: runTimeConfig.public.GITHUB_OAUTH_REDIRECT,
-    scope: "user:email",
-    state: user.id, // Extremely bad way of passing the current user to assign token. FIX
-  };
-
-  const qs = new URLSearchParams(options);
-  return window.location.assign(`${rootURL}?${qs.toString()}`);
-};
 </script>
 <script>
 export default {
@@ -43,7 +28,7 @@ export default {
     // 6: Store the runtime config options in variables that can be concatenated in the <a> tag href.
     // 7: Use state option below to have a dynamic routing to use.
     // 8: If we proxy our server with our client, we don't run the risk of losing our access token in the local storage (Nuxt3 doesnt seem to have proxy-functionality?)
-    async getGithubURL() {
+    async getGithubURL(id) {
       const rootURL = "https://github.com/login/oauth/authorize";
       const options = {
         client_id: runTimeConfig.public.GITHUB_OAUTH_CLIENT_ID,

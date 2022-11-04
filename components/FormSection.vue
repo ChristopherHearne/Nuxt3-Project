@@ -62,10 +62,10 @@
     <button @click="getProfiles">Clear Inputs</button>
   </div>
 </template>
-<script setup>
 
-</script>
 <script>
+import { setCookie, getCookie } from '../tools/cookieHandler'
+
 export default {
   name: "Update",
   data() {
@@ -115,8 +115,9 @@ export default {
       );
       this.post.success = true;
       this.post.message = `${results.profileName} was created and added to the database successfully`;
-      localStorage.setItem("active_user", JSON.stringify(results))
-      await navigateTo('/my-profile')
+      setCookie('active_user', JSON.stringify(results), 10)
+      console.log(getCookie('active_user'))
+      await navigateTo('/myprofile/info')
     },
     async getRepos() {
       const response = await fetch(

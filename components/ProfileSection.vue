@@ -90,7 +90,7 @@ const updateProfile = async (activeUser) => {
   }
   if (response.ok && response.status === 204) {
     console.log(`User ${activeUser.profileName} was successfully updated`);
-    localStorage.setItem("active_user", JSON.stringify(activeUser))
+    document.cookie = `active_user=${JSON.stringify(activeUser)}`
   }
 };
 </script>
