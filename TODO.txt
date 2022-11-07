@@ -3,3 +3,10 @@ In order:
 TODO: Make sure that when a user is updated, the githubusername is not removed or set to null
 TODO: Show info about github account after OAUTH-verification
 TODO: Code Cleanup and refactoring
+
+
+Fluffy ideas: 
+
+1. Show latest commit in code-form in the portfolio
+2. Percentage of frontend and backend code in the repo
+3. Drag and Drop Portfolio creator
