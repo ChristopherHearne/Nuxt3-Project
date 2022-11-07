@@ -27,8 +27,6 @@ const popEndpoint = async (url) => {
   return results
 }
 
-const id = 61;
-
 const { data: profile } = await useFetch(
   `http://localhost:10157/api/profile/${id}`
 ); // Figure out proxy for Nuxt3
