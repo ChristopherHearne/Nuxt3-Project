@@ -1,7 +1,7 @@
 In order: 
 
 TODO: Show info about github account after OAUTH-verification
-TODO: Code Cleanup and refactoring
+TODO: Code Cleanup and refactoring (Fix null values coming from the DB is one)
 
 
 Fluffy ideas: 
