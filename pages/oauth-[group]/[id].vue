@@ -2,7 +2,6 @@
   <div class="form-container">
     <ProfileSection :activeUser="activeUser" />
     <GitUserInfoSection :gitHubInfo="githubData" />
-	<button @click="navigateToPortfolio">Go to Portfolio</button>
   </div>
 </template>
 
@@ -49,12 +48,6 @@ const getGitHubData = async (token) => {
   githubData.value = results;
   return results;
 };
-
-const navigateToPortfolio = () => {
-	const activeUser = {...activeUserData.value}
-	console.log(activeUser)
-	navigateTo(`/myportfolio/${activeUser.profileName}`)
-}
 
 watch(
   activeUser,
