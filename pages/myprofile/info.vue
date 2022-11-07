@@ -4,9 +4,15 @@
     <ConnectGitSection :activeUser="activeUser" />
   </div>
 </template>
-
+<script setup>
+  definePageMeta({
+    layout: 'signedin'
+  })
+</script>
 <script>
 import { getCookie } from "~~/tools/cookieHandler";
+
+
 export default {
   data() {
     return {

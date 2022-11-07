@@ -12,6 +12,9 @@
 </template>
 
 <script setup>
+definePageMeta({
+  layout: 'signedin'
+})
 const route = useRoute();
 const repos = ref();
 const avatarURL = ref()

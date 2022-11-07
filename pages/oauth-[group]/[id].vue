@@ -13,6 +13,10 @@ const profileBaseURL = runTimeConfig.public.WEB_API_PROFILES_BASE_URL;
 const tokenBaseURL = runTimeConfig.public.WEB_API_TOKENS_BASE_URL;
 const route = useRoute();
 
+definePageMeta({
+  layout: 'signedin'
+})
+
 const { data: activeUser } = await useFetch(
   `${profileBaseURL}/${route.params.id}`
 );

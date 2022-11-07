@@ -10,15 +10,6 @@
             <nuxt-link to="/portfolios" class="link">Portfolios</nuxt-link>
           </li>
           <li>
-            <nuxt-link to="/myportfolio" class="link">My Portfolio</nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/update" class="link">Admin</nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/myprofile/info" class="link">My Profile</nuxt-link>
-          </li>
-          <li>
             <nuxt-link to="/create" class="link">Create Profile</nuxt-link>
           </li>
         </ul>

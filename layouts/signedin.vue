@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<slot name="header">
-			<NavBarLanding/>
+			<NavBarSigned/>
 		</slot>
 		<slot />
 		<!-- <slot name="footer">
