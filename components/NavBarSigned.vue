@@ -10,10 +10,10 @@
 			  <nuxt-link to="/portfolios" class="link">Portfolios</nuxt-link>
 			</li>
 			<li>
-			  <nuxt-link to="/myportfolio" class="link">My Portfolio</nuxt-link>
+			  <nuxt-link :to="portfolioRoute" class="link">My Portfolio</nuxt-link>
 			</li>
 			<li>
-			  <nuxt-link to="/myprofile/info" class="link">My Profile</nuxt-link>
+			  <nuxt-link :to="profileRoute" class="link">My Profile</nuxt-link>
 			</li>
 			<li>
 			  <nuxt-link to="/create" class="link">Create Profile</nuxt-link>
@@ -23,7 +23,30 @@
 	  </div>
 	</div>
   </template>
-  <script></script>
+
+<script>
+import { getCookie } from '~~/tools/cookieHandler';
+export default {
+	data() {
+		return {
+			portfolioRoute: null,
+			profileRoute: null, 
+
+		}
+	},
+	async created() {
+    if (process.client) {
+      const userCookie = getCookie("active_user");
+      if (userCookie) {
+        const data = JSON.parse(userCookie);
+		this.portfolioRoute = `/myportfolio/${data.profileName}`
+		this.profileRoute = `/myprofile/${data.profileName}`
+      }
+    }
+  },
+}
+
+</script>
   <style scoped>
   .nav-sidebar {
 	background-color: #161619;

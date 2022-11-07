@@ -116,7 +116,7 @@ export default {
       this.post.success = true;
       this.post.message = `${results.profileName} was created and added to the database successfully`;
       setCookie('active_user', JSON.stringify(results), 1)
-      await navigateTo('/myprofile/info')
+      await navigateTo(`/myprofile/${results.profileName}`)
     },
     async getRepos() {
       const response = await fetch(
