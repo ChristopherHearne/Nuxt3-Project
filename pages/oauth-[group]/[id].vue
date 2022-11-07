@@ -1,6 +1,6 @@
 <template>
   <div class="form-container">
-    <ProfileSection :activeUser="activeUser" />
+    <ProfileSection :activeUser="activeUserData" />
     <GitUserInfoSection :gitHubInfo="githubData" />
   </div>
 </template>
@@ -74,6 +74,7 @@ watch(
       const updatedData = { ...activeUserData.value };
       updatedData.githubUsername = github.login;
       await insertGitUsername(updatedData);
+      activeUserData.value = updatedData
     }
   },
   {

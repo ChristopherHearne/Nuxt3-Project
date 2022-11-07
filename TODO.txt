@@ -1,6 +1,5 @@
 In order: 
 
-TODO: Make sure that when a user is updated, the githubusername is not removed or set to null
 TODO: Show info about github account after OAUTH-verification
 TODO: Code Cleanup and refactoring
 
