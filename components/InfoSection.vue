@@ -1,7 +1,7 @@
 <template lang="">
   <div class="info--container">
       <div class="info--text">
-          <!-- <img :src="profile.avatar" class="info--image"/> -->
+          <img :src="avatarURL" class="info--image"/> -->
           <h2 class="info--header">{{`${profile.firstName} ${profile.lastName}`}}</h2>
           <h4 class="info--jobtitle">{{profile.title}}</h4>
           <span class="info--website">{{profile.website}}</span>
@@ -26,7 +26,8 @@
 export default {
   name: 'InfoSection', 
   props: {
-    profile: {}
+    profile: {}, 
+    avatarURL: '', 
   }
 }
 </script>

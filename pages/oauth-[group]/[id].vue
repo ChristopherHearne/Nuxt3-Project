@@ -2,12 +2,13 @@
   <div class="form-container">
     <ProfileSection :activeUser="activeUser" />
     <GitUserInfoSection :gitHubInfo="githubData" />
+	<button @click="navigateToPortfolio">Go to Portfolio</button>
   </div>
 </template>
 
 <script setup>
 const githubData = ref();
-const activeUserData = ref()
+const activeUserData = ref();
 const runTimeConfig = useRuntimeConfig();
 const profileBaseURL = runTimeConfig.public.WEB_API_PROFILES_BASE_URL;
 const tokenBaseURL = runTimeConfig.public.WEB_API_TOKENS_BASE_URL;
@@ -46,14 +47,20 @@ const getGitHubData = async (token) => {
   });
   const results = await response.json();
   githubData.value = results;
-  return results
+  return results;
 };
+
+const navigateToPortfolio = () => {
+	const activeUser = {...activeUserData.value}
+	console.log(activeUser)
+	navigateTo(`/myportfolio/${activeUser.profileName}`)
+}
 
 watch(
   activeUser,
   async (data) => {
     if (data) {
-		activeUserData.value = {...data}
+      activeUserData.value = { ...data };
     }
   },
   {
@@ -67,8 +74,8 @@ watch(
   async (data) => {
     if (data) {
       const github = await getGitHubData({ ...data });
-		const updatedData = {...activeUserData.value}
-		updatedData.githubUsername = github.login
+      const updatedData = { ...activeUserData.value };
+      updatedData.githubUsername = github.login;
       await insertGitUsername(updatedData);
     }
   },
