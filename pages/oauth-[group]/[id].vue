@@ -1,12 +1,13 @@
 <template>
   <div class="form-container">
     <ProfileSection :activeUser="activeUserData" />
-    <GitUserInfoSection :gitHubInfo="githubData" />
+    <GitUserInfoSection :gitHubInfo="githubData" :repoData="repoData" />
   </div>
 </template>
 
 <script setup>
 const githubData = ref();
+const repoData = ref()
 const activeUserData = ref();
 const runTimeConfig = useRuntimeConfig();
 const profileBaseURL = runTimeConfig.public.WEB_API_PROFILES_BASE_URL;
@@ -47,11 +48,16 @@ const getGitHubData = async (token) => {
       Authorization: `${token.tokenType} ${token.accessToken}`,
       Accept: "application/json",
     },
-  });
-  const results = await response.json();
+  });  const results = await response.json();
   githubData.value = results;
   return results;
 };
+
+const getRepos = async (repo_url) => {
+  const response = await fetch(repo_url)
+  const results = await response.json()
+  return results
+}
 
 watch(
   activeUser,
@@ -71,10 +77,12 @@ watch(
   async (data) => {
     if (data) {
       const github = await getGitHubData({ ...data });
+      repoData.value = await getRepos(github.repos_url)
       const updatedData = { ...activeUserData.value };
       updatedData.githubUsername = github.login;
       await insertGitUsername(updatedData);
       activeUserData.value = updatedData
+
     }
   },
   {

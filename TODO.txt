@@ -1,7 +1,11 @@
 In order: 
 
 TODO: Show info about github account after OAUTH-verification
+TODO: Show authenticated users portfolios
+TODO: Create designated error pages for bad connections to the server and general errors. Take a look at the loading and error-modules for Nuxt
 TODO: Code Cleanup and refactoring (Fix null values coming from the DB is one)
+TODO: Focus on styling. Create the home page
+TODO: Sign-in compatibility
 
 
 Fluffy ideas: 
