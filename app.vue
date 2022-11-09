@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <NuxtLayout>
+  <div class="app">
+    <NuxtLayout class="app">
       <NuxtPage/>
     </NuxtLayout>
   </div>
@@ -13,7 +13,14 @@ body{
   font-family: 'Inter', sans-serif; 
   box-sizing: border-box; 
 }
-
+.app{
+  display: flex;
+  margin: 0 auto; 
+  justify-content: space-around;
+  align-items: center;
+  min-height: 100vh; 
+  min-width: 100vh;
+}
 button {
   align-items: center;
   background-clip: padding-box;
@@ -58,8 +65,14 @@ button:active {
   transform: translateY(0);
 }
 
-h1, h3{
+h1, h3, h2{
   font-weight: 100; 
   color: #fff; 
 }
+
+span{
+  font-weight: 100; 
+  color: #fff;
+}
+
 </style>

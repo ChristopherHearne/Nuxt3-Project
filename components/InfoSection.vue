@@ -42,7 +42,8 @@ a{
   background-color: #1A1B21;
   width: 317px;
   height: auto;
-  margin: 0 auto;  
+  margin: 0 auto; 
+  font-weight: 100;  
 }
 .info--text{
   text-align: center; 
@@ -85,7 +86,7 @@ a{
 }
 
 .info--header{
-  font-weight: 700;
+  font-weight: 100;
   color: #fff; 
   font-size: 25px;
   font-style: normal;
