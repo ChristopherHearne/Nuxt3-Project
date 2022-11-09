@@ -31,14 +31,11 @@ export default {
 	},
 	data(){
 		return {
-			loginHeader: `Username: `, 
+			loginHeader: `Username:`, 
 			repoHeader: 'Repos:',
 			infoHeader: 'Your github data'
 		}
 	},
-	created(){
-		this.loginHeader += this.gitHubInfo.login
-	}
 }
 
 </script>

@@ -31,7 +31,6 @@ const getGitHubData = async (token) => {
     },
   });
   const results = await response.json();
-  githubData.value = results;
   return results;
 };
 
@@ -57,6 +56,7 @@ watch(activeUser, async (data) => {
       needsGithubAuth = false
       const accessToken = await getAccessToken(userData.id);
       const dataEnt = await getGitHubData(accessToken);
+      githubData.value = dataEnt
       repoData.value = await getRepos(dataEnt.repos_url)
     }
   }
