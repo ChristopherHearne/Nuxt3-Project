@@ -1,1 +1,0 @@
-// Potential implementation of regular fetch clauses for the profile-table

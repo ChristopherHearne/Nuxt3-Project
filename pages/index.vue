@@ -1,10 +1,11 @@
 <template>
   <div>
-    
+    {{data}}
   </div>
 </template>
 
-<script>
+<script setup>
+  const data = await this.$profileRepository.index()
 </script>
 <style scoped>
   *{

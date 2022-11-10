@@ -1,100 +1,105 @@
 <template>
-	<div class="profile-body">
-	  <div class="info-container">
-		<InfoSection :profile="profile" :avatarURL="avatarURL" />
-		<AboutSection :profile="profile" />
-		<FooterSection :profile="profile" />
-	  </div>
-	  <div class="github-container">
-		<GitHubSection :githubRepos="repos" />
-	  </div>
-	</div>
-  </template>
-  
-  <script setup>
-  definePageMeta({
-	layout: 'signedin'
-  })
-  const route = useRoute();
-  const repos = ref();
-  const avatarURL = ref()
-  const runTimeConfig = useRuntimeConfig();
-  
-  const popEndpoint = async (url) => {
-	const results = await Promise.resolve(
-	  fetch(url, {
-		method: "GET",
-	  }).then((response) => response.json())
-	);
-	return results;
-  };
-  
-  const setGitHubAvatar = async (username) => {
-	const gitHubUserReq = await fetch(`https://api.github.com/users/${username}`)
-	const userResults = await gitHubUserReq.json()
-	avatarURL.value = userResults.avatar_url
-  } 
-  
-  const setGitHubRepos = async (username) => {
-	const githubRepoReq = await fetch(`https://api.github.com/users/${username}/repos`)
-	 const results = await githubRepoReq.json()
-	 repos.value = results
-	 populateGitHubRepos(repos.value)
-  }
-  
-  const populateGitHubRepos = async (repos) => {
-	repos.forEach(async (repo) => {
-		  const data = await popEndpoint(repo.languages_url);
-		  repo.total_lines = Object.values(data).reduce((a, b) => a + b, 0);
-		  repo.languages = Object.entries(data).map((item) => {
-			return {
-			  language: item[0],
-			  lines: item[1],
-			  percentage_of_lines: ((item[1] / repo.total_lines) * 100).toFixed(
-				1
-			  ),
-			};
-		  });
-		});
-  }
+  <div class="profile-body">
+    <div class="info-container">
+      <InfoSection :profile="profile" :avatarURL="avatarURL" />
+      <AboutSection :profile="profile" />
+      <FooterSection :profile="profile" />
+    </div>
+    <div class="github-container">
+      <GitHubSection :githubRepos="repos" />
+    </div>
+  </div>
+</template>
 
-  const { data: profile } = await useFetch( () => `${runTimeConfig.public.WEB_API_PROFILES_BASE_URL}/profiles/${route.params.profile}`, {method: 'get', initialCache: false,})
+<script setup>
+definePageMeta({
+  layout: "signedin",
+});
+const route = useRoute();
+const repos = ref();
+const avatarURL = ref();
+const runTimeConfig = useRuntimeConfig();
 
-  watch(
-	profile,
-	async (data) => {
-	  const profile = {...data}
-	  setGitHubAvatar(profile.githubUsername)
-	  setGitHubRepos(profile.githubUsername)
-	},
-	{
-	  deep: true,
-	  immediate: true,
-	}
-  )
-  </script>
-  <style>
-  .profile-body {
-	margin: 0;
-	box-sizing: border-box;
-	background-color: #23252c;
-	display: flex;
-	justify-content: space-evenly;
-	font-family: "Inter", sans-serif;
-	min-height: 100vh;
-	width: auto;
-	padding: 50px;
+const popEndpoint = async (url) => {
+  const results = await Promise.resolve(
+    fetch(url, {
+      method: "GET",
+    }).then((response) => response.json())
+  );
+  return results;
+};
+
+gitHubService.log();
+
+const setGitHubAvatar = async (username) => {
+  const gitHubUserReq = await fetch(`https://api.github.com/users/${username}`);
+  const userResults = await gitHubUserReq.json();
+  avatarURL.value = userResults.avatar_url;
+};
+
+const setGitHubRepos = async (username) => {
+  const githubRepoReq = await fetch(
+    `https://api.github.com/users/${username}/repos`
+  );
+  const results = await githubRepoReq.json();
+  repos.value = results;
+  populateGitHubRepos(repos.value);
+};
+
+const populateGitHubRepos = async (repos) => {
+  repos.forEach(async (repo) => {
+    const data = await popEndpoint(repo.languages_url);
+    repo.total_lines = Object.values(data).reduce((a, b) => a + b, 0);
+    repo.languages = Object.entries(data).map((item) => {
+      return {
+        language: item[0],
+        lines: item[1],
+        percentage_of_lines: ((item[1] / repo.total_lines) * 100).toFixed(1),
+      };
+    });
+  });
+};
+
+const { data: profile } = await useFetch(
+  () =>
+    `${runTimeConfig.public.WEB_API_PROFILES_BASE_URL}/profiles/${route.params.profile}`,
+  { method: "get", initialCache: false }
+);
+
+watch(
+  profile,
+  async (data) => {
+    const profile = { ...data };
+    await setGitHubAvatar(profile.githubUsername);
+    await setGitHubRepos(profile.githubUsername);
+  },
+  {
+    deep: true,
+    immediate: true,
   }
-  
-  .info-container {
-	margin: 0 50px 50px 50px; 
-  }
-  
-  body {
-	margin: 0;
-	box-sizing: border-box;
-	min-height: 100vh;
-	background-color: #23252c;
-  }
-  </style>
-  
+);
+</script>
+<style>
+.profile-body {
+  margin: 0;
+  box-sizing: border-box;
+  background-color: #23252c;
+  display: flex;
+  justify-content: space-evenly;
+  font-family: "Inter", sans-serif;
+  min-height: 100vh;
+  width: auto;
+  padding: 50px;
+}
+
+.info-container {
+  margin: 0 50px 50px 50px;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  background-color: #23252c;
+}
+</style>

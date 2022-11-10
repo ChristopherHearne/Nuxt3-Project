@@ -58,7 +58,7 @@ const populateGitHubRepos = async (repos) => {
       });
 }
 
-const { data: profile } = await useFetch( () => `${runTimeConfig.public.WEB_API_PROFILES_BASE_URL}/profiles/${route.params.profile}`, {method: get, initialCache: false,})
+const { data: profile } = await useFetch( () => `${runTimeConfig.public.WEB_API_PROFILES_BASE_URL}/profiles/${route.params.profile}`, {method: 'get', initialCache: false,})
   
 
 watch(

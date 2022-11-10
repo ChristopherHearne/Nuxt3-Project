@@ -1,1 +1,0 @@
-// Potential implementation for common Token-calls to the API
