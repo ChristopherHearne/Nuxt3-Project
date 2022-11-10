@@ -23,54 +23,17 @@ const repos = ref();
 const avatarURL = ref();
 const runTimeConfig = useRuntimeConfig();
 
-
-
-const popEndpoint = async (url) => {
-  const results = await Promise.resolve(
-    fetch(url, {
-      method: "GET",
-    }).then((response) => response.json())
-  );
-  return results;
-};
-
-
-const setGitHubAvatar = async (username) => {
-  const gitHubUserReq = await fetch(`https://api.github.com/users/${username}`);
-  const userResults = await gitHubUserReq.json();
-  avatarURL.value = userResults.avatar_url;
-};
-
-const setGitHubRepos = async (username) => {
-  const githubRepoReq = await fetch(
-    `https://api.github.com/users/${username}/repos`
-  );
-  const results = await githubRepoReq.json();
-  repos.value = results;
-  populateGitHubRepos(repos.value);
-};
-
-const populateGitHubRepos = async (repos) => {
-  repos.forEach(async (repo) => {
-    const data = await popEndpoint(repo.languages_url);
-    repo.total_lines = Object.values(data).reduce((a, b) => a + b, 0);
-    repo.languages = Object.entries(data).map((item) => {
-      return {
-        language: item[0],
-        lines: item[1],
-        percentage_of_lines: ((item[1] / repo.total_lines) * 100).toFixed(1),
-      };
-    });
-  });
-};
 const profile = await app.$profileRepository.showByName(route.params.profile)
 
 watch(
   profile,
   async (data) => {
     const profile = { ...data };
-    await setGitHubAvatar(profile.githubUsername);
-    await setGitHubRepos(profile.githubUsername);
+    const userData = await app.$githubRepository.getUserData(profile.githubUsername)
+    const repoData = await app.$githubRepository.popGitHubEndpoint(userData.repos_url)
+    repos.value = repoData
+    avatarURL.value = userData.avatar_url
+    await app.$githubRepository.populateGitHubRepos(repos.value);
   },
   {
     deep: true,

@@ -1,11 +1,13 @@
 export default () => (baseURL) => ({
 	async getUserData(username){
-		const {data: gitHubData} = await useFetch(`${baseURL}/${username}`)
-		return gitHubData
+		const gitHubUserReq = await fetch(`${baseURL}/${username}`);
+  		const userResults = await gitHubUserReq.json();
+		return userResults
 	},
 	async getRepoData(username){
-		const {data: repoData} = await useFetch(`${baseURL}/${username}/repos`)
-		return repoData
+		const gitHubUserReq = await fetch(`${baseURL}/${username}/repos`);
+  		const repoResults = await gitHubUserReq.json();
+		return repoResults
 	},
 	async popGitHubEndpoint(url){
 		const results = await Promise.resolve(
