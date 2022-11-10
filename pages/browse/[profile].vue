@@ -57,16 +57,13 @@
 		  });
 		});
   }
-  console.log(route.params.profile)
-  const { data: profile } = useFetch(
-	`${runTimeConfig.public.WEB_API_PROFILES_BASE_URL}/profiles/${route.params.profile}`
-  );
-  
+
+  const { data: profile } = await useFetch( () => `${runTimeConfig.public.WEB_API_PROFILES_BASE_URL}/profiles/${route.params.profile}`, {method: 'get', initialCache: false,})
+
   watch(
 	profile,
 	async (data) => {
 	  const profile = {...data}
-	  console.log(profile)
 	  setGitHubAvatar(profile.githubUsername)
 	  setGitHubRepos(profile.githubUsername)
 	},
@@ -90,8 +87,7 @@
   }
   
   .info-container {
-	margin-left: 50px;
-	margin-bottom: 100px;
+	margin: 0 50px 50px 50px; 
   }
   
   body {

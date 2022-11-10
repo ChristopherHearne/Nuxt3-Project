@@ -58,20 +58,22 @@ const populateGitHubRepos = async (repos) => {
       });
 }
 
-const { data: profile } = await useFetch(
-  `${runTimeConfig.public.WEB_API_PROFILES_BASE_URL}/profiles/${route.params.profile}`
-);
+const { data: profile } = await useFetch( () => `${runTimeConfig.public.WEB_API_PROFILES_BASE_URL}/profiles/${route.params.profile}`, {method: get, initialCache: false,})
+  
 
 watch(
   profile,
   async (data) => {
-    const profile = {...data}
-    setGitHubAvatar(profile.githubUsername)
-    setGitHubRepos(profile.githubUsername)
+    let profile = {...data}
+    console.log(profile)
+    await Promise.all([
+      setGitHubAvatar(profile.githubUsername),
+      setGitHubRepos(profile.githubUsername)
+    ])
   },
   {
     deep: true,
-    immediate: true,
+    immediate: false,
   }
 )
 </script>

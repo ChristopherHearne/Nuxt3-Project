@@ -1,0 +1,1 @@
+// Potential implementation for common >Github-APIcalls
