@@ -6,7 +6,6 @@
 
 <script setup>
 const app = useNuxtApp()
-
 const data = await app.$profileRepository.index()
 
 </script>

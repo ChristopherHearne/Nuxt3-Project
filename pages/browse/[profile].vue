@@ -12,13 +12,18 @@
 </template>
 
 <script setup>
+
 definePageMeta({
   layout: "signedin",
 });
+
+const app = useNuxtApp()
 const route = useRoute();
 const repos = ref();
 const avatarURL = ref();
 const runTimeConfig = useRuntimeConfig();
+
+
 
 const popEndpoint = async (url) => {
   const results = await Promise.resolve(
@@ -29,7 +34,6 @@ const popEndpoint = async (url) => {
   return results;
 };
 
-gitHubService.log();
 
 const setGitHubAvatar = async (username) => {
   const gitHubUserReq = await fetch(`https://api.github.com/users/${username}`);
@@ -59,12 +63,7 @@ const populateGitHubRepos = async (repos) => {
     });
   });
 };
-
-const { data: profile } = await useFetch(
-  () =>
-    `${runTimeConfig.public.WEB_API_PROFILES_BASE_URL}/profiles/${route.params.profile}`,
-  { method: "get", initialCache: false }
-);
+const profile = await app.$profileRepository.showByName(route.params.profile)
 
 watch(
   profile,
