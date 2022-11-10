@@ -1,4 +1,4 @@
-export default (baseURL) => ({
+export default () => (baseURL) => ({
 	async getUserData(username){
 		const {data: gitHubData} = await useFetch(`${baseURL}/${username}`)
 		return gitHubData
@@ -17,7 +17,7 @@ export default (baseURL) => ({
 	}, 
 	async populateGitHubRepos(repos){
 		repos.forEach(async (repo) => {
-			const data = await popEndpoint(repo.languages_url);
+			const data = await popGitHubEndpoint(repo.languages_url);
 			repo.total_lines = Object.values(data).reduce((a, b) => a + b, 0);
 			repo.languages = Object.entries(data).map((item) => {
 			  return {
