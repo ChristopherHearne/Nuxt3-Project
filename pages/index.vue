@@ -5,7 +5,10 @@
 </template>
 
 <script setup>
-  const data = await this.$profileRepository.index()
+const app = useNuxtApp()
+
+const data = await app.$profileRepository.index()
+
 </script>
 <style scoped>
   *{

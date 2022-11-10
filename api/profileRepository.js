@@ -1,8 +1,10 @@
 export default () => (resource) => ({
 	async index(){
-		return await fetch(`${resource}`, {
+		const response = await fetch(`${resource}/profiles`, {
 			method: 'GET'
 		})
+		const results = await response.json()
+		return results 
 	},
 	async create(payload){
 		return await fetch(`${resource}`, payload, {
@@ -14,6 +16,11 @@ export default () => (resource) => ({
 			method: 'GET'
 		})
 	},
+	async showByName(profileName){
+		const response = await fetch(`${resource}/profiles/${profileName}`)
+		const results = await response.json()
+		return results 
+	}, 
 	async update(payload, id){
 		return await fetch(`${resource}/${id}`, payload, {
 			method: 'PUT'
