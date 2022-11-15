@@ -6,7 +6,7 @@
       @click="goToPortfolio(profile.profileName)"
     >
       <div class="item-header">
-        <h2>{{ profile.profileName }}</h2>
+        <h2>{{ profile.firstName + profile.lastName }}</h2>
         <div class="icons--container">
           <a :href="profile.facebook" class="facebook--icon" target="_blank"
             ><i class="fa-brands fa-facebook-f"></i
@@ -30,11 +30,8 @@
 </template>
 
 <script setup>
-const route = useRoute();
-const runTimeConfig = useRuntimeConfig();
-const { data: profiles } = await useFetch(
-  `${runTimeConfig.public.WEB_API_PROFILES_BASE_URL}/profiles/authenticated`
-);
+const app = useNuxtApp()
+const profiles = await app.$profileRepository.getAuthenticatedProfiles()
 
 const goToPortfolio = (profileName) => {
   navigateTo(`/browse/${profileName}`);

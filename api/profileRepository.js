@@ -6,9 +6,8 @@ export default () => (baseURL) => ({
     return profiles;
   },
   async getAuthenticatedProfiles() {
-    const response = await fetch(`${baseURL}/profiles/authenticated`);
-    const results = await response.json();
-    return results;
+    const { data: profiles } = await useFetch(`${baseURL}/profiles/authenticated`);
+    return profiles;
   },
   async create(payload) {
     return await fetch(`${baseURL}`, payload, {
