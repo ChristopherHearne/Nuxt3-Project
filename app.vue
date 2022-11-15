@@ -13,14 +13,7 @@ body{
   font-family: 'Inter', sans-serif; 
   box-sizing: border-box; 
 }
-.app{
-  display: flex;
-  margin: 0 auto; 
-  justify-content: space-around;
-  align-items: center;
-  min-height: 100vh; 
-  min-width: 100vh;
-}
+
 button {
   align-items: center;
   background-clip: padding-box;

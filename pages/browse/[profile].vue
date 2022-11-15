@@ -42,15 +42,13 @@ watch(
 </script>
 <style>
 .profile-body {
-  margin: 0;
-  box-sizing: border-box;
   background-color: #23252c;
   display: flex;
   justify-content: space-evenly;
   font-family: "Inter", sans-serif;
   min-height: 100vh;
-  width: auto;
-  padding: 25px 50px 50px 50px;
+  width: 60%;
+  margin-left: 200px;
 }
 
 .info-container {

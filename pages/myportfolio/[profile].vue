@@ -41,7 +41,7 @@ watch(
   }
 )
 </script>
-<style>
+<style scoped>
 .profile-body {
   margin: 0;
   box-sizing: border-box;
@@ -51,7 +51,6 @@ watch(
   font-family: "Inter", sans-serif;
   min-height: 100vh;
   width: auto;
-  padding: 50px;
 }
 
 .info-container {
