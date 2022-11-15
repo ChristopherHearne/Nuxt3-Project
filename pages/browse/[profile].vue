@@ -21,7 +21,6 @@ const app = useNuxtApp()
 const route = useRoute();
 const repos = ref();
 const avatarURL = ref();
-const runTimeConfig = useRuntimeConfig();
 
 const profile = await app.$profileRepository.showByName(route.params.profile)
 
@@ -51,7 +50,7 @@ watch(
   font-family: "Inter", sans-serif;
   min-height: 100vh;
   width: auto;
-  padding: 50px;
+  padding: 25px 50px 50px 50px;
 }
 
 .info-container {

@@ -1,13 +1,13 @@
 export default () => (baseURL) => ({
 	async getUserData(username){
-		const gitHubUserReq = await fetch(`${baseURL}/${username}`);
-  		const userResults = await gitHubUserReq.json();
-		return userResults
+		const response = await fetch(`${baseURL}/${username}`);
+  		const results = await response.json();
+		return results
 	},
 	async getRepoData(username){
-		const gitHubUserReq = await fetch(`${baseURL}/${username}/repos`);
-  		const repoResults = await gitHubUserReq.json();
-		return repoResults
+		const response = await fetch(`${baseURL}/${username}/repos`);
+  		const results = await response.json();
+		return results
 	},
 	async popGitHubEndpoint(url){
 		const results = await Promise.resolve(
@@ -19,7 +19,7 @@ export default () => (baseURL) => ({
 	}, 
 	async populateGitHubRepos(repos){
 		repos.forEach(async (repo) => {
-			const data = await popGitHubEndpoint(repo.languages_url);
+			const data = await this.popGitHubEndpoint(repo.languages_url);
 			repo.total_lines = Object.values(data).reduce((a, b) => a + b, 0);
 			repo.languages = Object.entries(data).map((item) => {
 			  return {
