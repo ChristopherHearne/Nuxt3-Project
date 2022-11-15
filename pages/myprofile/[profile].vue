@@ -2,7 +2,7 @@
   <div class="form-container">
     <ProfileSection :activeUser="activeUser" />
     <ConnectGitSection :activeUser="activeUser" v-if="needsGithubAuth" />
-    <GitUserInfoSection v-if="hasGithubData" :gitHubInfo="githubData" :repoData="repoData" />
+    <GitUserInfoSection v-if="hasGithubData" :gitHubInfo="activeUser" :repoData="repoData" />
   </div>
 </template>
 
@@ -31,11 +31,8 @@ watch(activeUser, async (data) => {
       hasGithubData = true;
       needsGithubAuth = false
       const accessToken = await app.$tokenRepository.showByProfileId(userData.id)
-      console.log(accessToken)
-      const dataEnt = await app.$githubRepository.getWithToken(accessToken, userData.githubUsername);
-      console.log(dataEnt)
-      githubData.value = dataEnt
-      repoData.value = await app.$githubRepository.popGitHubEndpoint(dataEnt.repos_url)
+      const gitHubData = await app.$githubRepository.getWithToken(accessToken, userData.githubUsername);
+      repoData.value = await app.$githubRepository.popGitHubEndpoint(gitHubData.repos_url)
     }
   }
 }, {
