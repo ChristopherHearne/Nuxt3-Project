@@ -6,7 +6,9 @@ export default () => (baseURL) => ({
     return profiles;
   },
   async getAuthenticatedProfiles() {
-    const { data: profiles } = await useFetch(`${baseURL}/profiles/authenticated`);
+    const { data: profiles } = await useFetch(
+      `${baseURL}/profiles/authenticated`
+    );
     return profiles;
   },
   async create(payload) {
@@ -15,10 +17,10 @@ export default () => (baseURL) => ({
     });
   },
   async show(id) {
-    const {data: profile} = await useFetch(`${baseURL}/${id}`, {
+    const { data: profile } = await useFetch(`${baseURL}/${id}`, {
       method: "GET",
     });
-    return profile
+    return profile;
   },
   async showByName(profileName) {
     const { data: profile } = await useFetch(
@@ -32,9 +34,9 @@ export default () => (baseURL) => ({
 
     Object.keys(payload).forEach((key) => form_data.append(key, payload[key]));
 
-    return await fetch(`${baseURL}/${id}`, payload, {
+    return await fetch(`${baseURL}/${id}`, {
       method: "PUT",
-	  body: form_data
+      body: form_data,
     });
   },
   async delete(id) {
