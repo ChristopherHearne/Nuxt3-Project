@@ -47,8 +47,8 @@ watch(
   justify-content: space-evenly;
   font-family: "Inter", sans-serif;
   min-height: 100vh;
-  width: 60%;
-  margin-left: 200px;
+  width: 80%;
+  margin-left: 8%;
 }
 
 .info-container {
