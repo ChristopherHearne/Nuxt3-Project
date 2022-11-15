@@ -17,7 +17,7 @@ export default () => (baseURL) => ({
 	},
 	async show(id){
 		return await fetch(`${baseURL}/${id}`, {
-			method: 'GET'
+			method: 'GET',
 		})
 	},
 	async showByName(profileName){

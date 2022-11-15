@@ -7,10 +7,12 @@
 </template>
 
 <script setup>
+
+const app = useNuxtApp()
 const route = useRoute();
 const githubData = ref();
 const repoData = ref()
-const runTimeConfig = useRuntimeConfig();
+
 definePageMeta({
   layout: "signedin",
 });
@@ -18,46 +20,24 @@ definePageMeta({
 let needsGithubAuth = true;
 let hasGithubData = false; 
 
-const { data: activeUser } = await useFetch(
-  `${runTimeConfig.public.WEB_API_PROFILES_BASE_URL}/profiles/${route.params.profile}`
-);
+console.log(route.params.profile)
+const activeUser = await app.$profileRepository.showByName(route.params.profile)
 
-
-const getGitHubData = async (token) => {
-  const response = await fetch("https://api.github.com/user", {
-    headers: {
-      Authorization: `${token.tokenType} ${token.accessToken}`,
-      Accept: "application/json",
-    },
-  });
-  const results = await response.json();
-  return results;
-};
-
-const getAccessToken = async (profileId) => {
-  const response = await fetch(encodeURI(
-    `${runTimeConfig.public.WEB_API_TOKENS_BASE_URL}/profile?profileId=${profileId}`)
-  );
-  return await response.json();
-};
-
-const getRepos = async (repo_url) => {
-  const response = await fetch(repo_url)
-  const results = await response.json()
-  return results
-}
 
 
 watch(activeUser, async (data) => {
   if (data) {
     const userData = { ...data };
+    console.log(userData)
     if (userData.githubUsername != null) {
       hasGithubData = true;
       needsGithubAuth = false
-      const accessToken = await getAccessToken(userData.id);
-      const dataEnt = await getGitHubData(accessToken);
+      const accessToken = await app.$tokenRepository.showByProfileId(userData.id)
+      console.log(accessToken)
+      const dataEnt = await app.$githubRepository.getWithToken(accessToken, userData.githubUsername);
+      console.log(dataEnt)
       githubData.value = dataEnt
-      repoData.value = await getRepos(dataEnt.repos_url)
+      repoData.value = await app.$githubRepository.popGitHubEndpoint(dataEnt.repos_url)
     }
   }
 }, {

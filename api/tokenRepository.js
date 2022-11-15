@@ -1,14 +1,9 @@
 export default () => (baseURL) => ({
 	async index(){
-		const {data: profiles} = await useFetch(`${baseURL}/profiles`, {
+		const {data: profiles} = await useFetch(`${baseURL}`, {
 			method: 'GET',
 		})
 		return profiles
-	},
-	async getAuthenticatedProfiles(){
-		const response = await fetch(`${baseURL}/profiles/authenticated`)
-		const results = await response.json()
-		return results
 	},
 	async create(payload){
 		return await fetch(`${baseURL}`, payload, {
@@ -20,17 +15,14 @@ export default () => (baseURL) => ({
 			method: 'GET'
 		})
 	},
-	async showByName(profileName){
-		const {data: profile} = await useFetch(`${baseURL}/profiles/${profileName}`, {method: 'get', initialCache: false})
-		return profile
+	async showByProfileId(profileId){
+		const response = await fetch(encodeURI(
+			`${baseURL}/profile?profileId=${profileId}`)
+		  );
+		  return await response.json();
 	}, 
-	async update(payload, id){
-		return await fetch(`${baseURL}/${id}`, payload, {
-			method: 'PUT'
-		})
-	},
 	async delete(id){
-		return await fetch(`${baseURL}/${id}`, {
+		return await fetch(`${baseURL}/delete/${id}`, {
 			method: 'DELETE'
 		})
 	}
