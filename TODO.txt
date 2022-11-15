@@ -1,10 +1,8 @@
 In order: 
 
-TODO: Show info about github account after OAUTH-verification // Partly done
-TODO: Make sure the data for each portfolio is showed correctly. It doesnt dynamically change. 
-TODO: Code Cleanup and refactoring (Fix null values coming from the DB is one)
+TODO: Focus on styling. Make sure footer and navbar is fixed. Create the home page (loading-animations etc.)
+TODO: Add more data to the portfolio page, such as amount of codelines per framework and technology
 TODO: Create designated error pages for bad connections to the server and general errors. Take a look at the loading and error-modules for Nuxt
-TODO: Focus on styling. Create the home page (loading-animations etc.)
 TODO: Sign-in compatibility
 
 
