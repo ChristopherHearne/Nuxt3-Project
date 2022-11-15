@@ -10,7 +10,6 @@
 
 const app = useNuxtApp()
 const route = useRoute();
-const githubData = ref();
 const repoData = ref()
 
 definePageMeta({
