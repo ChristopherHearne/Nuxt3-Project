@@ -19,10 +19,10 @@ export default () => (baseURL) => ({
 		const response = await fetch(encodeURI(
 			`${baseURL}/profile?profileId=${profileId}`)
 		  );
-		  return await response.json();
+		return await response.json();
 	}, 
 	async delete(id){
-		return await fetch(`${baseURL}/delete/${id}`, {
+		return await fetch(`${baseURL}/delete/ ${id}`, {
 			method: 'DELETE'
 		})
 	}

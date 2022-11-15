@@ -16,13 +16,14 @@ export default () => (baseURL) => ({
 	return results
   },
   async getGitHubData(token){
-	const response = await fetch(`${baseURL}/`, {
+	const response = await fetch(`https://api.github.com/user`, {
 		headers: {
 		  Authorization: `${token.tokenType} ${token.accessToken}`,
 		  Accept: "application/json",
 		},
 	  })
-	return await response.json()
+	const results = await response.json()
+  return results
   },
   async getRepoData(username) {
     const response = await fetch(`${baseURL}/${username}/repos`);

@@ -6,83 +6,30 @@
 </template>
 
 <script setup>
+const app = useNuxtApp()
 const githubData = ref();
 const repoData = ref()
 const activeUserData = ref();
-const runTimeConfig = useRuntimeConfig();
-const profileBaseURL = runTimeConfig.public.WEB_API_PROFILES_BASE_URL;
-const tokenBaseURL = runTimeConfig.public.WEB_API_TOKENS_BASE_URL;
 const route = useRoute();
 
 definePageMeta({
   layout: 'signedin'
 })
 
-const { data: activeUser } = await useFetch(
-  `${profileBaseURL}/${route.params.id}`
-);
-const { data: gitHubInfo } = await useFetch(`${tokenBaseURL}/profile`, {
-  params: { profileId: route.params.id },
-});
-
-const insertGitUsername = async (data) => {
-  var form_data = new FormData();
-
-  Object.keys(data).forEach((key) => form_data.append(key, data[key]));
-
-  const response = await fetch(
-    `${runTimeConfig.WEB_API_PROFILES_BASE_URL}/${route.params.id}`,
-    {
-      method: "PUT",
-      body: form_data,
-    }
-  );
-  if (response.ok) {
-    console.log(`Github username was successfully inserted`);
-  }
-};
-
-const getGitHubData = async (token) => {
-  const response = await fetch("https://api.github.com/user", {
-    headers: {
-      Authorization: `${token.tokenType} ${token.accessToken}`,
-      Accept: "application/json",
-    },
-  });  const results = await response.json();
-  githubData.value = results;
-  return results;
-};
-
-const getRepos = async (repo_url) => {
-  const response = await fetch(repo_url)
-  const results = await response.json()
-  return results
-}
+const activeUser = await app.$profileRepository.show(route.params.id)
 
 watch(
   activeUser,
   async (data) => {
     if (data) {
       activeUserData.value = { ...data };
-    }
-  },
-  {
-    deep: true,
-    immediate: true,
-  }
-);
-
-watch(
-  gitHubInfo,
-  async (data) => {
-    if (data) {
-      const github = await getGitHubData({ ...data });
-      repoData.value = await getRepos(github.repos_url)
-      const updatedData = { ...activeUserData.value };
-      updatedData.githubUsername = github.login;
-      await insertGitUsername(updatedData);
+      const accessToken = await app.$tokenRepository.showByProfileId(route.params.id)
+      const githubData = await app.$githubRepository.getGitHubData(accessToken)
+      repoData.value = await app.$githubRepository.popGitHubEndpoint(githubData.repos_url)
+      const updatedData = {...activeUserData.value}
+      updatedData.githubUsername = githubData.login
+      await app.$profileRepository.update(updatedData, route.params.id)
       activeUserData.value = updatedData
-
     }
   },
   {
