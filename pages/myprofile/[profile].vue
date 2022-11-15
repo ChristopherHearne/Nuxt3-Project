@@ -20,7 +20,6 @@ definePageMeta({
 let needsGithubAuth = true;
 let hasGithubData = false; 
 
-console.log(route.params.profile)
 const activeUser = await app.$profileRepository.showByName(route.params.profile)
 
 
