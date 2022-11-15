@@ -21,13 +21,13 @@
 <style scoped>
 .nav-sidebar {
   background-color: #161619;
-  min-height: 100vh;
-  width: 150px;
+  height: 100%;
+  width: 9%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   left: 0;
 }
 .nav-container .link {
