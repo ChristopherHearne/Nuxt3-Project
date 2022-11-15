@@ -4,7 +4,7 @@
 			<h1>{{infoHeader}}<i class="fa-brands fa-github"></i></h1>
 		</div>
 		<div class="github-data">
-			<h3>{{loginHeader}}</h3>
+			<h3>{{loginHeader + gitHubInfo.githubUsername}}</h3>
 			<table>
 				<thead>
 					<tr>

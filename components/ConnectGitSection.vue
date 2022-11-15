@@ -10,7 +10,9 @@
   </div>
 </template>
 <script setup>
+
 const runTimeConfig = useRuntimeConfig();
+
 const getGithubURL = async(id) => {
   const from = "/"
   const redirect_uri = encodeURI(`${runTimeConfig.public.GITHUB_OAUTH_REDIRECT}?id=${id}`)
@@ -23,7 +25,7 @@ const getGithubURL = async(id) => {
   };
 
   const qs = new URLSearchParams(options);
-  return window.location.assign(`${rootURL}?${qs.toString()}`); // Redundant and useless. Use a link that links directly to the github login authorize page in the button
+  return window.location.assign(`${rootURL}?${qs.toString()}`);
 }
 
 </script>

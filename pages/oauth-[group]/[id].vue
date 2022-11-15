@@ -1,13 +1,12 @@
 <template>
   <div class="form-container">
     <ProfileSection :activeUser="activeUserData" />
-    <GitUserInfoSection :gitHubInfo="githubData" :repoData="repoData" />
+    <GitUserInfoSection :gitHubInfo="activeUserData" :repoData="repoData" />
   </div>
 </template>
 
 <script setup>
 const app = useNuxtApp()
-const githubData = ref();
 const repoData = ref()
 const activeUserData = ref();
 const route = useRoute();
