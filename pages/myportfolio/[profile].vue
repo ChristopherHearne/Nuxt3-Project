@@ -29,7 +29,6 @@ watch(
   profile,
   async (data) => {
     const profile = { ...data };
-    console.log(profile)
     const userData = await app.$githubRepository.getUserData(profile.githubUsername)
     const repoData = await app.$githubRepository.popGitHubEndpoint(userData.repos_url)
     repos.value = repoData

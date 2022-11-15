@@ -11,9 +11,18 @@ export default () => (baseURL) => ({
         Accept: "application/json",
       },
     })
-
+	
 	const results = await response.json()
 	return results
+  },
+  async getGitHubData(token){
+	const response = await fetch(`${baseURL}/`, {
+		headers: {
+		  Authorization: `${token.tokenType} ${token.accessToken}`,
+		  Accept: "application/json",
+		},
+	  })
+	return await response.json()
   },
   async getRepoData(username) {
     const response = await fetch(`${baseURL}/${username}/repos`);

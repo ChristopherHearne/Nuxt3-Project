@@ -14,7 +14,6 @@ const runTimeConfig = useRuntimeConfig();
 const getGithubURL = async(id) => {
   const from = "/"
   const redirect_uri = encodeURI(`${runTimeConfig.public.GITHUB_OAUTH_REDIRECT}?id=${id}`)
-  console.log(redirect_uri)
   const rootURL = "https://github.com/login/oauth/authorize";
   const options = {
     client_id: runTimeConfig.public.GITHUB_OAUTH_CLIENT_ID,

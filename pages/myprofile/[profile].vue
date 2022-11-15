@@ -27,7 +27,6 @@ const activeUser = await app.$profileRepository.showByName(route.params.profile)
 watch(activeUser, async (data) => {
   if (data) {
     const userData = { ...data };
-    console.log(userData)
     if (userData.githubUsername != null) {
       hasGithubData = true;
       needsGithubAuth = false
