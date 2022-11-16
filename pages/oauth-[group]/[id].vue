@@ -27,6 +27,7 @@ watch(
       repoData.value = await app.$githubRepository.popGitHubEndpoint(githubData.repos_url)
       const updatedData = {...activeUserData.value}
       updatedData.githubUsername = githubData.login
+      updatedData.avatar = githubData.avatar_url
       await app.$profileRepository.update(updatedData, route.params.id)
       activeUserData.value = updatedData
     }
