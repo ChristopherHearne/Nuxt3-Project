@@ -28,7 +28,7 @@
     display: flex; 
     justify-content: space-around;
     align-items: center;
-    animation: fadeIn 1.5s ease-out; 
+    animation: fadeInFromBottom 1.5s ease-in-out; 
   }
 
   .home-intro div{
@@ -56,19 +56,19 @@
     font-size: 40em;
   }
 
-  @keyframes fadeIn{
+  @keyframes fadeInFromBottom{
   0%{
-    right: 0;
+    margin: 12em 0 6em 6em;
     opacity: 0;
   }
 
   1%{
-    right: 10px; 
+    margin: 12em 0 6em 6em; 
     opacity: 0;
   }
 
   100%{
-    right: 100px; 
+    margin: 6em 0 6em 6em; 
     opacity: 1; 
   }
 }

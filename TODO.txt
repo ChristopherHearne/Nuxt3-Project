@@ -1,6 +1,6 @@
 In order: 
 
-TODO: Create the home page ( create loading-animations for the github oauth button etc.)
+TODO: Style the Create Profile Page ( create loading-animations for the github oauth button etc.)
 TODO: Create designated error pages for bad connections to the server and general errors. Take a look at the loading and error-modules for Nuxt
 TODO: Add more data to the portfolio page, such as amount of codelines per framework and technology
 TODO: Delete unnecessary endpoints in the API
