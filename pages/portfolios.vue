@@ -4,11 +4,14 @@
       class="portfolios-item"
       v-for="(profile, index) in profiles"
       :key="profile.id"
-      @click="goToPortfolio(profile.profileName)"
     >
       <div class="item-header">
-        <div class="item-header-default">
-          <h2>{{ profile.firstName + " " + profile.lastName }}</h2>
+        <div class="item-header-default" :style="hover && currentIndex === index ? 'display: none;' : ''">
+          <div 
+          class="item-profile-name"
+          @click="goToPortfolio(profile.profileName)">
+            <h2>{{ profile.firstName + " " + profile.lastName }}</h2>
+          </div>
           <div class="item-about">
             <span>{{ profile.title }}</span>
           </div>
@@ -27,24 +30,31 @@
             ></a>
           </div>
         </div>
-        <div class="item-header-hover" v-if="hover && currentIndex === index">
-          Frontend
+        <div class="item-header-hover" :style="hover && currentIndex === index ? '' : 'display: none'">
+          <h2>Skills</h2>
+          <h3>Frontend</h3>
+          <div class="skill-progressbar-frontend">
+            <div></div>
+          </div>
+          <h3>Backend</h3>
+          <div class="skill-progressbar-backend">
+            <div></div>
+          </div>
         </div>
       </div>
       <div class="item-avatar">
         <img class="avatar" :src="profile.avatar" />
       </div>
-      <div
-        class="item-chevron"
-        @mouseover="
+      <div class="item-arrow"
+      @click="goToPortfolio(profile.profileName)"
+      @mouseover="
           hover = true;
           currentIndex = index;
         "
         @mouseout="
           hover = false;
           currentIndex = -1;
-        "
-      >
+        ">
         <i class="fa-solid fa-chevron-right"></i>
       </div>
     </div>
@@ -54,10 +64,15 @@
 <script setup>
 const app = useNuxtApp();
 const profiles = await app.$profileRepository.getAuthenticatedProfiles();
+const widthFrontend = ref()
+const widthBackend = ref()
+widthFrontend.value = '10%'
+widthBackend.value = '20%'
 
 const goToPortfolio = (profileName) => {
   navigateTo(`/browse/${profileName}`);
 };
+
 </script>
 <script>
 export default {
@@ -73,19 +88,18 @@ export default {
 <style scoped>
 .portfolios-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 3em;
-  grid-template-columns: repeat(4, 1fr);
-  row-gap: 2em;
-  column-gap: 1em;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 8em;
+  column-gap: 2em;
   margin: 0 2em 0 9%;
   padding: 50px;
 }
 
 .portfolios-item {
-  height: auto;
+  max-height: 150px;
   width: 100%;
-  cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -95,9 +109,10 @@ export default {
   border-radius: 20px;
   text-align: left;
   margin: 0 auto;
-  padding: 4.5rem 1.5rem 4rem 1.5rem;
+  padding: 4.5rem 1.5rem 4.5rem 1.5rem;
   overflow: visible;
-  transition: transform 0.8s ease;
+  transition: transform 0.4s ease-out;
+  position: relative; 
 }
 
 .portfolios-item:hover {
@@ -105,12 +120,19 @@ export default {
   filter: brightness(1.05);
 }
 
-.item--header {
+.item-header {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  align-items: baseline;
+  align-items: left;
+  justify-content: left;
   font-weight: 400;
+  width: 100%;
+  height: 125px;
+}
+
+.item-header-default{
+  animation: fadeIn 0.8s ease-out; 
 }
 
 .icons--container {
@@ -119,6 +141,7 @@ export default {
   justify-content: left;
   align-items: center;
   color: #fff;
+  margin-top: 15px; 
 }
 div a i {
   color: #918e9b;
@@ -157,13 +180,115 @@ span {
   margin-left: 40px;
   color: #918e9b;
   font-size: 25px;
-  transition: transform 0.3s ease 0s;
+  transition: transform 0.7s ease; 
 }
 
-.fa-chevron-right:hover {
-  transform: rotate(180deg);
-}
 .hide {
   display: none;
+}
+
+.skill-progressbar-frontend {
+  background-color: #918e9b;
+  width: 90%;
+  border-radius: 13px;
+  padding: 3px;
+  margin-bottom: 6px; 
+}
+
+.skill-progressbar-frontend>div {
+  background-color: #f3bf99;
+  width: v-bind(widthFrontend);
+  height: 10px;
+  border-radius: 10px;
+  animation: slowLoadFrontend 1s ease-out; 
+}
+
+.skill-progressbar-backend {
+  background-color: #918e9b;
+  width: 90%; 
+  border-radius: 13px;
+  padding: 3px;
+}
+
+.skill-progressbar-backend>div {
+  background-color: #f3bf99;
+  width: v-bind(widthBackend);
+  height: 10px;
+  border-radius: 10px;
+  animation: slowLoadBackend 1s ease-out; 
+}
+
+.item-header-hover{
+  display: block; 
+  width: 100%;
+  height: 125px; 
+  margin: 0 auto; 
+  animation: fadeIn 0.8s ease-out; 
+  opacity: 1; 
+}
+
+.item-header-hover h3{
+  font-size: 13px; 
+  margin: 0; 
+  padding: 0;
+}
+
+
+.item-arrow, .item-profile-name{
+  cursor:pointer; 
+}
+
+.item-arrow{
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease 0s;
+}
+.item-arrow:hover .fa-chevron-right{
+  transform: rotate(180deg);
+}
+
+
+
+/* Could be moved to the assets/animations folder */ 
+@keyframes fadeIn{
+  0%{
+    right: 0;
+    opacity: 0;
+  }
+
+  1%{
+    right: 10px; 
+    opacity: 0;
+  }
+
+  100%{
+    right: 100px; 
+    opacity: 1; 
+  }
+}
+
+@keyframes slowLoadFrontend{
+  0%{
+    width: 0%;
+  }
+  1%{
+    width: 0%;
+  }
+  100%{
+    width: v-bind(widthFrontend)
+  }
+}
+
+@keyframes slowLoadBackend{
+  0%{
+    width: 0%;
+  }
+  1%{
+    width: 0%;
+  }
+  100%{
+    width: v-bind(widthBackend)
+  }
 }
 </style>
