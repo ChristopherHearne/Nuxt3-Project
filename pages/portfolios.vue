@@ -6,10 +6,14 @@
       :key="profile.id"
     >
       <div class="item-header">
-        <div class="item-header-default" :style="hover && currentIndex === index ? 'display: none;' : ''">
-          <div 
-          class="item-profile-name"
-          @click="goToPortfolio(profile.profileName)">
+        <div
+          class="item-header-default"
+          :style="hover && currentIndex === index ? 'display: none;' : ''"
+        >
+          <div
+            class="item-profile-name"
+            @click="goToPortfolio(profile.profileName)"
+          >
             <h2>{{ profile.firstName + " " + profile.lastName }}</h2>
           </div>
           <div class="item-about">
@@ -30,7 +34,10 @@
             ></a>
           </div>
         </div>
-        <div class="item-header-hover" :style="hover && currentIndex === index ? '' : 'display: none'">
+        <div
+          class="item-header-hover"
+          :style="hover && currentIndex === index ? '' : 'display: none'"
+        >
           <h2>Skills</h2>
           <h3>Frontend</h3>
           <div class="skill-progressbar-frontend">
@@ -45,16 +52,18 @@
       <div class="item-avatar">
         <img class="avatar" :src="profile.avatar" />
       </div>
-      <div class="item-arrow"
-      @click="goToPortfolio(profile.profileName)"
-      @mouseover="
+      <div
+        class="item-arrow"
+        @click="goToPortfolio(profile.profileName)"
+        @mouseover="
           hover = true;
           currentIndex = index;
         "
         @mouseout="
           hover = false;
           currentIndex = -1;
-        ">
+        "
+      >
         <i class="fa-solid fa-chevron-right"></i>
       </div>
     </div>
@@ -64,15 +73,14 @@
 <script setup>
 const app = useNuxtApp();
 const profiles = await app.$profileRepository.getAuthenticatedProfiles();
-const widthFrontend = ref()
-const widthBackend = ref()
-widthFrontend.value = '10%'
-widthBackend.value = '20%'
+const widthFrontend = ref();
+const widthBackend = ref();
+widthFrontend.value = "10%";
+widthBackend.value = "20%";
 
 const goToPortfolio = (profileName) => {
   navigateTo(`/browse/${profileName}`);
 };
-
 </script>
 <script>
 export default {
@@ -112,7 +120,7 @@ export default {
   padding: 4.5rem 1.5rem 4.5rem 1.5rem;
   overflow: visible;
   transition: transform 0.4s ease-out;
-  position: relative; 
+  position: relative;
 }
 
 .portfolios-item:hover {
@@ -131,8 +139,8 @@ export default {
   height: 125px;
 }
 
-.item-header-default{
-  animation: fadeIn 0.8s ease-out; 
+.item-header-default {
+  animation: fadeIn 0.8s ease-out;
 }
 
 .icons--container {
@@ -141,14 +149,14 @@ export default {
   justify-content: left;
   align-items: center;
   color: #fff;
-  margin-top: 15px; 
+  margin-top: 15px;
 }
 div a i {
   color: #918e9b;
   margin-right: 1em;
 }
 h2 {
-  margin: 10px 0 10px 0;
+  margin: 10px 0 5px 0;
   font-weight: 100;
   letter-spacing: -0.02em;
   width: 250px;
@@ -180,7 +188,7 @@ span {
   margin-left: 40px;
   color: #918e9b;
   font-size: 25px;
-  transition: transform 0.7s ease; 
+  transition: transform 0.7s ease;
 }
 
 .hide {
@@ -188,107 +196,127 @@ span {
 }
 
 .skill-progressbar-frontend {
-  background-color: #918e9b;
+  background-color: #fff;
   width: 90%;
   border-radius: 13px;
   padding: 3px;
-  margin-bottom: 6px; 
+  margin-bottom: 6px;
 }
 
-.skill-progressbar-frontend>div {
-  background-color: #f3bf99;
+.skill-progressbar-frontend > div {
+  background: #314755; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #26a0da,
+    #314755
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #26a0da,
+    #314755
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   width: v-bind(widthFrontend);
   height: 10px;
   border-radius: 10px;
-  animation: slowLoadFrontend 1s ease-out; 
+  animation: slowLoadFrontend 1s ease-out;
 }
 
 .skill-progressbar-backend {
-  background-color: #918e9b;
-  width: 90%; 
+  background-color: #fff;
+  width: 90%;
   border-radius: 13px;
   padding: 3px;
 }
 
-.skill-progressbar-backend>div {
-  background-color: #f3bf99;
+.skill-progressbar-backend > div {
+  background: #314755; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #26a0da,
+    #314755
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #26a0da,
+    #314755
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   width: v-bind(widthBackend);
   height: 10px;
   border-radius: 10px;
-  animation: slowLoadBackend 1s ease-out; 
+  animation: slowLoadBackend 1s ease-out;
 }
 
-.item-header-hover{
-  display: block; 
+.item-header-hover {
+  display: block;
   width: 100%;
-  height: 125px; 
-  margin: 0 auto; 
-  animation: fadeIn 0.8s ease-out; 
-  opacity: 1; 
+  height: 125px;
+  margin: 0 auto;
+  animation: fadeIn 0.8s ease-out;
+  opacity: 1;
 }
 
-.item-header-hover h3{
-  font-size: 13px; 
-  margin: 0; 
+.item-header-hover h3 {
+  font-size: 13px;
+  margin: 0 0 7px 0;
   padding: 0;
 }
 
-
-.item-arrow, .item-profile-name{
-  cursor:pointer; 
+.item-arrow,
+.item-profile-name {
+  cursor: pointer;
 }
 
-.item-arrow{
-  display: flex; 
+.item-arrow {
+  display: flex;
   justify-content: center;
   align-items: center;
   transition: transform 0.3s ease 0s;
 }
-.item-arrow:hover .fa-chevron-right{
+.item-arrow:hover .fa-chevron-right {
   transform: rotate(180deg);
 }
 
-
-
-/* Could be moved to the assets/animations folder */ 
-@keyframes fadeIn{
-  0%{
+/* Could be moved to the assets/animations folder */
+@keyframes fadeIn {
+  0% {
     right: 0;
     opacity: 0;
   }
 
-  1%{
-    right: 10px; 
+  1% {
+    right: 10px;
     opacity: 0;
   }
 
-  100%{
-    right: 100px; 
-    opacity: 1; 
+  100% {
+    right: 100px;
+    opacity: 1;
   }
 }
 
-@keyframes slowLoadFrontend{
-  0%{
+@keyframes slowLoadFrontend {
+  0% {
     width: 0%;
   }
-  1%{
+  1% {
     width: 0%;
   }
-  100%{
-    width: v-bind(widthFrontend)
+  100% {
+    width: v-bind(widthFrontend);
   }
 }
 
-@keyframes slowLoadBackend{
-  0%{
+@keyframes slowLoadBackend {
+  0% {
     width: 0%;
   }
-  1%{
+  1% {
     width: 0%;
   }
-  100%{
-    width: v-bind(widthBackend)
+  100% {
+    width: v-bind(widthBackend);
   }
 }
 </style>
