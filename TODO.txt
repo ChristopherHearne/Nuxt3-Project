@@ -1,11 +1,13 @@
 In order: 
 
-TODO: Focus on styling. Make sure footer and navbar is fixed. Create the home page (loading-animations etc.)
+TODO: Create the home page ( create loading-animations for the github oauth button etc.)
 TODO: Create designated error pages for bad connections to the server and general errors. Take a look at the loading and error-modules for Nuxt
 TODO: Add more data to the portfolio page, such as amount of codelines per framework and technology
 TODO: Delete unnecessary endpoints in the API
 TODO: Sign-in compatibility
 TODO: Make sure the navbar has the correct headers and functionality based on there being a user that is "signed in"
+TODO: Add all animations to the assets folder
+TODO: Make sure the user never has to navigate to null values. I.E IF the user has a null-value in their profile, don't even show any interactivity with that component. 
 
 
 Fluffy ideas: 

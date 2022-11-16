@@ -126,7 +126,7 @@ export default {
   flex-direction: column;
   align-items: left;
   justify-content: left;
-  font-weight: 400;
+  font-weight: 100;
   width: 100%;
   height: 125px;
 }
@@ -149,7 +149,7 @@ div a i {
 }
 h2 {
   margin: 10px 0 10px 0;
-  font-weight: 300;
+  font-weight: 100;
   letter-spacing: -0.02em;
   width: 250px;
 }
