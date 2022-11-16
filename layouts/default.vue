@@ -4,8 +4,8 @@
 			<NavBarLanding/>
 		</slot>
 		<slot />
-		<slot name="footer">
+		<!-- <slot name="footer">
 			<FooterLayout/> 
-		</slot>
+		</slot> -->
 	</div>
 </template>
