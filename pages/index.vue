@@ -19,8 +19,10 @@
   .home-container{
     margin-left: 10%;
     display: flex; 
-    align-items: left; 
-    justify-content: space-between;
+    align-items: center; 
+    justify-content: center;
+    width: 90%; 
+    height: 100vh;
   }
 
   .home-intro{

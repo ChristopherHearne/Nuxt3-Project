@@ -90,16 +90,14 @@ export default {
       hover: false,
     };
   },
-  computed() {},
 };
 </script>
 <style scoped>
 .portfolios-container {
   display: grid;
+  grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 3em;
-  grid-template-columns: repeat(3, 1fr);
-  row-gap: 8em;
+  row-gap: 1em;
   column-gap: 2em;
   margin: 0 2em 0 9%;
   padding: 50px;
@@ -204,17 +202,17 @@ span {
 }
 
 .skill-progressbar-frontend > div {
-  background: #314755; /* fallback for old browsers */
+  background: #314755; 
   background: -webkit-linear-gradient(
     to right,
     #26a0da,
     #314755
-  ); /* Chrome 10-25, Safari 5.1-6 */
+  ); 
   background: linear-gradient(
     to right,
     #26a0da,
     #314755
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  ); 
 
   width: v-bind(widthFrontend);
   height: 10px;
@@ -230,17 +228,17 @@ span {
 }
 
 .skill-progressbar-backend > div {
-  background: #314755; /* fallback for old browsers */
+  background: #314755; 
   background: -webkit-linear-gradient(
     to right,
     #26a0da,
     #314755
-  ); /* Chrome 10-25, Safari 5.1-6 */
+  );
   background: linear-gradient(
     to right,
     #26a0da,
     #314755
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  );
 
   width: v-bind(widthBackend);
   height: 10px;
@@ -253,7 +251,7 @@ span {
   width: 100%;
   height: 125px;
   margin: 0 auto;
-  animation: fadeIn 0.8s ease-out;
+  animation: fadeIn 0.8s ease-in;
   opacity: 1;
 }
 
@@ -281,17 +279,18 @@ span {
 /* Could be moved to the assets/animations folder */
 @keyframes fadeIn {
   0% {
-    right: 0;
+    filter: brightness(1); 
     opacity: 0;
+
   }
 
   1% {
-    right: 10px;
+    filter: brightness(1);
     opacity: 0;
   }
 
   100% {
-    right: 100px;
+    filter: brightness(1.03);
     opacity: 1;
   }
 }
