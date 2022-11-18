@@ -16,6 +16,8 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using System.Net.Http.Headers;
 using System.Text.Json;
+using System.Net.Http;
+using Microsoft.AspNetCore.Http;
 
 namespace API_Test
 {

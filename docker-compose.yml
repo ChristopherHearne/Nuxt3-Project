@@ -4,6 +4,7 @@ services:
   nuxt:
     build:
       context: .
+      dockerfile: ./Dockerfile.frontend
     image: nuxt_dev
     container_name: nuxt_dev
     command: npm run dev
@@ -12,3 +13,9 @@ services:
     - /app/node_modules
     ports:
       - "3000:3000"
+  db: 
+    build:
+      context: .
+      dockerfile: ./Dockerfile.backend
+    image: db_dev
+    
