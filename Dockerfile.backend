@@ -1,6 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 WORKDIR /db
 
+
 COPY backend/*.sln .
 COPY backend/*.csproj .
 
@@ -12,6 +13,7 @@ RUN dotnet publish -c Release -o /app --use-current-runtime
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
+ENV ASPNETCORE_URLS=http://localhost:9362
 COPY --from=build-env /app .
-ENTRYPOINT ["dotnet", "backend.dll"]
+ENTRYPOINT ["dotnet", "API-Test.dll"]
 

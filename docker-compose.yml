@@ -18,4 +18,5 @@ services:
       context: .
       dockerfile: ./Dockerfile.backend
     image: db_dev
+    container_name: db_dev
 
