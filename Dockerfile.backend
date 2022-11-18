@@ -1,15 +1,17 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
-WORKDIR /backend
+WORKDIR /db
 
-# Copy everything
-COPY /backend ./backend/
-# Restore as distinct layers
+COPY backend/*.sln .
+COPY backend/*.csproj .
+
 RUN dotnet restore
-# Build and publish a release
-RUN dotnet publish -c Release -o out
+
+COPY backend/. .
+RUN dotnet publish -c Release -o /app --no-restore --use-current-runtime --self-contained false
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
-WORKDIR /backend
-COPY --from=build-env /backend/out .
-ENTRYPOINT ["dotnet", "DotNet.Docker.dll"]
+WORKDIR /app
+COPY --from=build-env /app .
+ENTRYPOINT ["dotnet", "backend.dll"]
+
