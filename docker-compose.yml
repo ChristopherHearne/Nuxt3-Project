@@ -18,5 +18,10 @@ services:
       context: .
       dockerfile: ./Dockerfile.backend
     image: db_dev
+    environment:
+      - ASPNETCORE_URLS=http://+:9362:80
+      - ASPNETCORE_ENVIRONMENT=Development
     container_name: db_dev
+    ports: 
+      - "9362:80"
 
