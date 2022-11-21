@@ -5,23 +5,18 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile.frontend
-    image: nuxt_dev
-    container_name: nuxt_dev
-    command: npm run dev
-    volumes:
-    - .:/app
-    - /app/node_modules
-    ports:
+    image: nuxt_build
+    container_name: nuxt_app
+    ports: 
       - "3000:3000"
   db: 
     build:
       context: .
       dockerfile: ./Dockerfile.backend
-    image: db_dev
+    image: db_prod
     environment:
       - ASPNETCORE_URLS=http://+:9362:80
-      - ASPNETCORE_ENVIRONMENT=Development
-    container_name: db_dev
+    container_name: db_api
     ports: 
       - "9362:80"
 
