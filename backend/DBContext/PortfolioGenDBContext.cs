@@ -24,7 +24,7 @@ namespace API_Test.DBContext
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=tcp:portfoliogensqldatabase.database.windows.net,1433;Initial Catalog=PortfolioGenDB;Persist Security Info=False;User ID=portAdmin;Password=EFjUAPveMg4K89x;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                optionsBuilder.UseSqlServer();
             }
         }
 

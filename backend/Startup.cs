@@ -1,27 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using API_Test.Models;
-using API_Test.DBContext; 
-using System.ComponentModel;
-using Microsoft.Extensions.Configuration;
+using API_Test.DBContext;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using System.Net.Http.Headers;
 using System.Text.Json;
-using System.Net.Http;
-using Microsoft.AspNetCore.Http;
 
 namespace API_Test
 {
-    public class Startup
+	public class Startup
     {
         public Startup(IConfiguration configuration)
         {
