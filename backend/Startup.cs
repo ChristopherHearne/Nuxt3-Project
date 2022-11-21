@@ -26,6 +26,7 @@ namespace API_Test
 
             services.AddDbContext<PortfolioGenDBContext>(options => options.UseSqlServer(connection));
 
+            /*
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -59,6 +60,7 @@ namespace API_Test
                 };
 
             });
+            */
 
             services.AddSwaggerGen(options =>
             {
@@ -95,8 +97,8 @@ namespace API_Test
                 c.RoutePrefix = String.Empty; 
             });
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization(); 
+            // app.UseAuthentication();
+            // app.UseAuthorization(); 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
