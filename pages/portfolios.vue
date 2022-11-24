@@ -2,8 +2,8 @@
   <div class="portfolios-container">
     <div
       class="portfolios-item"
-      v-for="(profile, index) in profiles"
-      :key="profile.id"
+      v-for="({firstName, lastName, title, facebook, instagram, linkedin, github}, index) in profiles"
+      :key="id"
     >
       <div class="item-header">
         <div
@@ -11,25 +11,25 @@
           :style="hover && currentIndex === index ? 'display: none;' : ''"
         >
           <div
-            class="item-profile-name"
-            @click="goToPortfolio(profile.profileName)"
+            class="item-name"
+            @click="goToPortfolio(profileName)"
           >
-            <h2>{{ profile.firstName + " " + profile.lastName }}</h2>
+            <h2>{{ firstName + " " + lastName }}</h2>
           </div>
           <div class="item-about">
-            <span>{{ profile.title }}</span>
+            <span>{{ title }}</span>
           </div>
           <div class="icons--container">
-            <a :href="profile.facebook" class="facebook--icon" target="_blank"
+            <a :href="facebook" class="facebook--icon" target="_blank"
               ><i class="fa-brands fa-facebook-f"></i
             ></a>
-            <a :href="profile.instagram" class="instagram--icon" target="_blank"
+            <a :href="instagram" class="instagram--icon" target="_blank"
               ><i class="fa-brands fa-instagram"></i
             ></a>
-            <a :href="profile.linkedin" class="linkedin--icon" target="_blank"
+            <a :href="linkedin" class="linkedin--icon" target="_blank"
               ><i class="fa-brands fa-linkedin"></i
             ></a>
-            <a :href="profile.github" class="github--icon" target="_blank"
+            <a :href="github" class="github--icon" target="_blank"
               ><i class="fa-brands fa-github"></i
             ></a>
           </div>
@@ -50,11 +50,11 @@
         </div>
       </div>
       <div class="item-avatar">
-        <img class="avatar" :src="profile.avatar" />
+        <img class="avatar" :src="avatar" />
       </div>
       <div
         class="item-arrow"
-        @click="goToPortfolio(profile.profileName)"
+        @click="goToPortfolio(profileName)"
         @mouseover="
           hover = true;
           currentIndex = index;
@@ -262,7 +262,7 @@ span {
 }
 
 .item-arrow,
-.item-profile-name {
+.item-name {
   cursor: pointer;
 }
 
