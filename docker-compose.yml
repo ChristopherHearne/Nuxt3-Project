@@ -6,6 +6,7 @@ services:
       context: .
       dockerfile: ./Dockerfile.frontend
     image: nuxt_build
+    # platform: linux/x86_64
     container_name: nuxt_app
     ports: 
       - "3000:3000"
@@ -14,6 +15,7 @@ services:
       context: .
       dockerfile: ./Dockerfile.backend
     image: db_prod
+    # platform: linux/x86_64
     environment:
       - ASPNETCORE_URLS=http://+:9362:80
     container_name: db_api

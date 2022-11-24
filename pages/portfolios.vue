@@ -2,7 +2,7 @@
   <div class="portfolios-container">
     <div
       class="portfolios-item"
-      v-for="({firstName, lastName, title, facebook, instagram, linkedin, github}, index) in profiles"
+      v-for="({profileName, firstName, lastName, title, avatar, facebook, instagram, linkedin, github}, index) in profiles"
       :key="id"
     >
       <div class="item-header">
