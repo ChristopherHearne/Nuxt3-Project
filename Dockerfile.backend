@@ -8,7 +8,7 @@ EXPOSE 80
 RUN dotnet restore --use-current-runtime
 
 COPY backend/. .
-RUN dotnet publish -c Release -o /app --use-current-runtime 
+RUN dotnet publish -c Release -o /app --use-current-runtime
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
