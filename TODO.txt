@@ -1,6 +1,8 @@
 In order: 
 
-TODO: Style the Create Profile Page. Use Vuex Store to handle the state of the profileinfo. Break up input sections into separate components and experiment with the design bookmarked. 
+TODO: Style the Create Profile Page. Use Vuex Store to handle the state of the profileinfo. Set up an ENUM for the separate component states, then store an array with the component names that references the states. 
+TODO: Make a distinct footer for the Next and Previous Step buttons
+TODO: Use the state to style the StateNavigator
 TODO: Create loading animations for github oauth and loading in general
 TODO: Create designated error pages for bad connections to the server and general errors. Take a look at the loading and error-modules for Nuxt
 TODO: Add more data to the portfolio page, such as amount of codelines per framework and technology
