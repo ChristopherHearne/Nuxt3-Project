@@ -1,9 +1,10 @@
 <template>
   <form @submit.prevent="handleNext" class="basic-info-container">
-    <input
-      placeholder="Firstname..."
-      type="text"
+    <v-text-field
+      class="firstname-field"
+      label="Firstname..."
       v-model="userData.firstName"
+      hide-details="auto"
       required
     />
     <input
@@ -37,5 +38,9 @@ export default {
 </script>
 
 <style scoped>
+  .firstname-field{
+    color: #fff !important;
+    width: 50% !important;
+  }
 
 </style>
