@@ -75,8 +75,10 @@ const app = useNuxtApp();
 const profiles = await app.$profileRepository.getAuthenticatedProfiles();
 const widthFrontend = ref();
 const widthBackend = ref();
+debugger; 
 widthFrontend.value = "10%";
 widthBackend.value = "20%";
+
 
 const goToPortfolio = (profileName) => {
   navigateTo(`/browse/${profileName}`);
