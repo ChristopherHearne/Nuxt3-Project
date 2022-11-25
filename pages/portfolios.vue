@@ -75,7 +75,7 @@ const app = useNuxtApp();
 const profiles = await app.$profileRepository.getAuthenticatedProfiles();
 const widthFrontend = ref();
 const widthBackend = ref();
-debugger; 
+debugger; // Attaches a debugger to the client
 widthFrontend.value = "10%";
 widthBackend.value = "20%";
 
