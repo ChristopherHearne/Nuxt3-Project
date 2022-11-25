@@ -5,7 +5,7 @@
         :class="{ error: error.set }"
         placeholder="Profile name..."
         type="text"
-        v-model="userData.profileName"
+        v-model="user.profileName"
         required
       />
       <div class="error-msg" v-if="error.set">{{ error.message }}</div>
@@ -16,7 +16,7 @@
 <script>
 export default {
   props: {
-    user: {},
+    user: Object,
   },
   data() {
     return {
@@ -28,12 +28,11 @@ export default {
         success: false,
         message: null,
       },
-      userData: {},
     };
   },
   methods: {
     async handleSubmit() {
-      const data = { ...this.userData };
+      const data = { ...this.user };
       const response = await this.$profileRepository.create(data);
 
       if (!response.ok) {
