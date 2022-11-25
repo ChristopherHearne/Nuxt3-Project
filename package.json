@@ -9,6 +9,7 @@
     "start": "nuxt start"
   },
   "devDependencies": {
+    "@nuxtjs/vuetify": "^1.12.3",
     "nuxt": "3.0.0-rc.11"
   },
   "dependencies": {
