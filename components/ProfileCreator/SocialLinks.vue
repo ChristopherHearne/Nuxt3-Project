@@ -3,28 +3,29 @@
     <input
       placeholder="Link to Facebook..."
       type="url"
-      v-model="user.facebook"
+      v-model="userData.facebook"
     />
     <input
       placeholder="Link to Instagram..."
       type="url"
-      v-model="user.instagram"
+      v-model="userData.instagram"
     />
     <input
       placeholder="Link to Github..."
       type="url"
-      v-model="user.github"
+      v-model="userData.github"
     />
     <input
       placeholder="Link to LinkedIn..."
       type="url"
-      v-model="user.linkedin"
+      v-model="userData.linkedin"
     />
     <input
       placeholder="Link to website/project..."
       type="url"
-      v-model="user.website"
+      v-model="userData.website"
     />
+	<button type="submit">Next -></button>
   </form>
 </template>
 
@@ -32,6 +33,11 @@
 export default {
   props: {
     user: Object,
+  },
+  data(){
+	return {
+		userData: {}
+	}
   },
   methods: {
     handleNext() {

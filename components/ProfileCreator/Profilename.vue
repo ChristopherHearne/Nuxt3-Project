@@ -5,7 +5,7 @@
         :class="{ error: error.set }"
         placeholder="Profile name..."
         type="text"
-        v-model="user.profileName"
+        v-model="userData.profileName"
         required
       />
       <div class="error-msg" v-if="error.set">{{ error.message }}</div>
@@ -28,6 +28,7 @@ export default {
         success: false,
         message: null,
       },
+	  userData: {}
     };
   },
   methods: {

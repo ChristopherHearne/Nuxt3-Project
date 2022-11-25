@@ -3,15 +3,16 @@
 	  <input
 		placeholder="Tell us a little about yourself"
 		type="text"
-		v-model="user.about"
+		v-model="userData.about"
 		required
 	  />
 	  <input
 		placeholder="Tell us about your interests"
 		type="text"
-		v-model="user.interests"
+		v-model="userData.interests"
 		required
 	  />
+	  <button type="submit">Next -></button>
 	</form>
   </template>
   
@@ -19,6 +20,11 @@
   export default {
 	props: {
 	  user: Object,
+	},
+	data(){
+		return {
+			userData: {}
+		}
 	},
 	methods: {
 	  handleNext(){

@@ -3,17 +3,17 @@
     <input
       placeholder="Firstname..."
       type="text"
-      v-model="user.firstName"
+      v-model="userData.firstName"
       required
     />
     <input
       placeholder="Lastname..."
       type="text"
-      v-model="user.lastName"
+      v-model="userData.lastName"
       required
     />
-    <input placeholder="Title..." type="text" v-model="user.title" required />
-    <input placeholder="Email..." type="email" v-model="user.email" required />
+    <input placeholder="Title..." type="text" v-model="userData.title" required />
+    <input placeholder="Email..." type="email" v-model="userData.email" required />
     <button type="submit">Next -></button>
   </form>
 </template>
@@ -22,6 +22,11 @@
 export default {
   props: {
     user: Object,
+  },
+  data(){
+	return{
+		userData: {}
+	}
   },
   methods: {
 	handleNext(){
