@@ -15,7 +15,7 @@
       required
     />
     <v-text-field
-      label="Jobtitle..."
+      label="Job title..."
       class="text-field"
       v-model="userData.title"
       hide-details="auto"
