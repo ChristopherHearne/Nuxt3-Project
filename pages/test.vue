@@ -18,7 +18,8 @@ const stateComponents = [
 	'BasicInfoVue',
 	'BioVue',
 	'SocialLinksVue',
-	'ProfilenameVue'
+	'ProfilenameVue',
+	'ConnectGitSectionVue'
 ]
 </script>
 <script>
@@ -26,9 +27,10 @@ import BasicInfoVue from '~~/components/ProfileCreator/BasicInfo.vue';
 import BioVue from '~~/components/ProfileCreator/Bio.vue';
 import SocialLinksVue from '~~/components/ProfileCreator/SocialLinks.vue';
 import ProfilenameVue from '~~/components/ProfileCreator/Profilename.vue';
+import ConnectGitSectionVue from '~~/components/ConnectGitSection.vue';
 export default{
 	components: {
-		BasicInfoVue, BioVue, SocialLinksVue, ProfilenameVue 
+		BasicInfoVue, BioVue, SocialLinksVue, ProfilenameVue, ConnectGitSectionVue
 	}
 }
 </script>
