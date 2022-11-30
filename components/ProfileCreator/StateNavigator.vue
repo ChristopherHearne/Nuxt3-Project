@@ -1,35 +1,42 @@
 <template>
 	<div class="container" >
-		<div class="step-container" :class="[activeClass, completedClass]">
+		<div class="step-container" :class="[ navigator.currentNavstate === 0 ? activeClass : '', navigator.currentNavstate > 0 ? completedClass: '']">
 			<div class="step-number">
 				<span class="number">1</span>
 				<i class="fa-solid fa-check"></i>
 			</div>
 			<span class="step-desc">Basic Info</span>
 		</div>
-		<div class="step-container">
+		<div class="step-container" :class="[navigator.currentNavstate === 1 ? activeClass : '', navigator.currentNavstate > 1 ? completedClass: '']">
 			<div class="step-number">
 				<span>2</span>
+				<i class="fa-solid fa-check"></i>
 			</div>
-			<span>Bio</span>
+			<span class="step-desc">Bio</span>
 		</div>
-		<div class="step-container">
+		<div class="step-container" :class="[navigator.currentNavstate === 2 ? activeClass : '', navigator.currentNavstate > 2 ? completedClass: '']">
 			<div class="step-number">
 				<span>3</span>
+				<i class="fa-solid fa-check"></i>
 			</div>
-			<span>Socials</span>
+			<span class="step-desc">Socials</span>
 		</div>
-		<div class="step-container">
+		<div class="step-container" :class="[navigator.currentNavstate === 3 ? activeClass : '', navigator.currentNavstate > 3 ? completedClass: '']">
 			<div class="step-number">
 				<span>4</span>
+				<i class="fa-solid fa-check"></i>
 			</div>
-			<span>Profile name</span>
+			<span class="step-desc">Profile name</span>
 		</div>
 	</div>
 </template>
 
 <script setup>
+import { useNavigator } from '~~/stores/navigator';
 
+const navigator = useNavigator()
+const completedClass = 'completed'
+const activeClass = 'active'
 </script>
 
 <script>
@@ -38,15 +45,14 @@ export default {
 		return {
 			isActive: true,
 			isCompleted: false, 
-			activeClass: 'active',
-			completedClass: 'completed', 
 		}
 	}
 }
 </script>
 <style scoped>
 	.container{
-		display: block; 
+		display: flex; 
+		flex-direction: column;
 		margin: 0 auto; 
 		width: 100%;
 		height: auto;

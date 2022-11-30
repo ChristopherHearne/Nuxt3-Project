@@ -8,7 +8,8 @@ enum Navstates {
 	BasicInfo, 
 	Bio, 
 	SocialLinks, 
-	ProfileName
+	ProfileName, 
+	Completed
 }
 
 const navstateRange = Object.keys(Navstates).length / 2 - 1
