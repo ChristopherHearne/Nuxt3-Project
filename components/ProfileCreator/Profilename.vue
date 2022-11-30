@@ -1,15 +1,16 @@
 <template>
-  <div class="profname-container">
+  <div class="profile-name-container">
     <form @submit.prevent="handleSubmit">
-      <input
+      <v-text-field
         :class="{ error: error.set }"
-        placeholder="Profile name..."
+        class="text-field"
+        label="Profile name..."
         type="text"
         v-model="userData.profileName"
         required
       />
       <div class="error-msg" v-if="error.set">{{ error.message }}</div>
-      <button type="submit">Next -></button>
+      <button type="submit">Create my profile</button>
     </form>
   </div>
 </template>
@@ -67,5 +68,18 @@ export default {
 
 .error {
   border-color: red;
+}
+
+.text-field {
+  color: #fff !important;
+  width: 100% !important;
+  padding: 1rem !important; 
+}
+
+.field-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 </style>

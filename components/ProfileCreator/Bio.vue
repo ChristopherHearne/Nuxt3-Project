@@ -1,18 +1,17 @@
 <template>
-	<form @submit.prevent="handleNext" class="bio-container">
-	  <input
-		placeholder="Tell us a little about yourself"
-		type="text"
+	<form @submit.prevent="handleNext" class="field-container">
+	  <v-text-field
+		label="Tell us a little about yourself"
+		class="text-field"
 		v-model="userData.about"
 		required
 	  />
-	  <input
-		placeholder="Tell us about your interests"
-		type="text"
+	  <v-text-field
+		label="Tell us about your interests"
+		class="text-field"
 		v-model="userData.interests"
 		required
 	  />
-	  <button type="submit">Next -></button>
 	</form>
   </template>
   
@@ -33,5 +32,18 @@
 	}
   };
   </script>
-  <style></style>
+  <style scoped>
+.text-field {
+  color: #fff !important;
+  width: 100% !important;
+  padding: 1rem !important; 
+}
+
+.field-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+</style>
   

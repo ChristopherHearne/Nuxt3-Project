@@ -1,21 +1,34 @@
 <template>
-  <form @submit.prevent="handleNext" class="basic-info-container">
+  <form @submit.prevent="handleNext" class="field-container">
     <v-text-field
-      class="firstname-field"
+      class="text-field"
       label="Firstname..."
       v-model="userData.firstName"
       hide-details="auto"
       required
     />
-    <input
-      placeholder="Lastname..."
-      type="text"
+    <v-text-field
+      label="Lastname..."
+      class="text-field"
       v-model="userData.lastName"
+      hide-details="auto"
       required
     />
-    <input placeholder="Title..." type="text" v-model="userData.title" required />
-    <input placeholder="Email..." type="email" v-model="userData.email" required />
-    <button type="submit">Next -></button>
+    <v-text-field
+      label="Jobtitle..."
+      class="text-field"
+      v-model="userData.title"
+      hide-details="auto"
+      required
+    />
+    <v-text-field
+      label="Email..."
+      class="text-field"
+      type="email"
+      v-model="userData.email"
+      hide-details="auto"
+      required
+    />
   </form>
 </template>
 
@@ -24,23 +37,31 @@ export default {
   props: {
     user: Object,
   },
-  data(){
-	return{
-		userData: {}
-	}
+  data() {
+    return {
+      userData: {},
+    };
   },
   methods: {
-	handleNext(){
-		// Logic to go to the next input section
-	}
-  }
+    handleNext() {
+      // Logic to go to the next input section
+    },
+  },
 };
 </script>
 
 <style scoped>
-  .firstname-field{
-    color: #fff !important;
-    width: 50% !important;
-  }
+.text-field {
+  color: #fff !important;
+  width: 100% !important;
+  padding: 1rem !important; 
+}
 
+.field-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 </style>

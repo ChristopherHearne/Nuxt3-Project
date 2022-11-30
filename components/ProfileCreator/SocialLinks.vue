@@ -1,31 +1,40 @@
 <template>
-  <form @submit.prevent="handleNext" class="links-container">
-    <input
-      placeholder="Link to Facebook..."
+  <form @submit.prevent="handleNext" class="field-container">
+    <v-text-field
+      label="Link to Facebook..."
+      class="text-field"
       type="url"
+      hide-details="auto"
       v-model="userData.facebook"
     />
-    <input
-      placeholder="Link to Instagram..."
+    <v-text-field
+      label="Link to Instagram..."
+      class="text-field"
       type="url"
+      hide-details="auto"
       v-model="userData.instagram"
     />
-    <input
-      placeholder="Link to Github..."
+    <v-text-field
+      label="Link to Github..."
+      class="text-field"
       type="url"
+      hide-details="auto"
       v-model="userData.github"
     />
-    <input
-      placeholder="Link to LinkedIn..."
+    <v-text-field
+      label="Link to LinkedIn..."
+      class="text-field"
       type="url"
+      hide-details="auto"
       v-model="userData.linkedin"
     />
-    <input
-      placeholder="Link to website/project..."
+    <v-text-field
+      label="Link to website/project..."
+      class="text-field"
       type="url"
+      hide-details="auto"
       v-model="userData.website"
     />
-	<button type="submit">Next -></button>
   </form>
 </template>
 
@@ -47,5 +56,16 @@ export default {
 };
 </script>
 <style scoped>
+.text-field {
+  color: #fff !important;
+  width: 100% !important;
+  padding: 1rem !important; 
+}
 
+.field-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 </style>
