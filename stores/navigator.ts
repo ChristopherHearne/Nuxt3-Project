@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
 export interface INavigatorState{
-	navigation: Navstates
+	currentNavstate: Navstates
 }
 
 enum Navstates {
@@ -11,31 +11,31 @@ enum Navstates {
 	ProfileName
 }
 
-const navstateRange = Object.keys(Navstates).length / 2
+const navstateRange = Object.keys(Navstates).length / 2 - 1
 
 export const useNavigator = defineStore('navigator', {
 	state: (): INavigatorState => ({
-		navigation: Navstates.BasicInfo
+		currentNavstate: Navstates.BasicInfo
 	}),
 	actions: {
 		nextNavstate(){
-			if (navstateRange === this.navigation){
+			if (navstateRange === this.currentNavstate){
 				this.resetNavstate()
 			}
 			else{
-				this.navigation++
+				this.currentNavstate++
 			}
 		},
 		previousNavstate(){
-			if (navstateRange === this.navigation){
+			if (navstateRange === this.currentNavstate){
 				this.resetNavstate()
 			}
 			else{
-				this.navigation--
+				this.currentNavstate--
 			}
 		},
 		resetNavstate(){
-			this.navigation = Navstates.BasicInfo
+			this.currentNavstate = Navstates.BasicInfo
 		},
 	}
 }) 

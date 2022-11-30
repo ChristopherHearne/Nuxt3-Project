@@ -11,7 +11,6 @@ export default {
 			navigateTo(`/myportfolio/${profileName}`)
 		}
 	}
-
 }
 </script>
 <style>
