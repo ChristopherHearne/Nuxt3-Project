@@ -27,7 +27,7 @@ export const useNavigator = defineStore('navigator', {
 			}
 		},
 		previousNavstate(){
-			if (navstateRange === this.currentNavstate){
+			if (navstateRange === this.currentNavstate || this.currentNavstate === 0){
 				this.resetNavstate()
 			}
 			else{
