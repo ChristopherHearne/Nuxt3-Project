@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-
+import { setCookie } from '~~/tools/cookieHandler';
 export default {
   props: {
     store: null,

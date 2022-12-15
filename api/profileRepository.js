@@ -12,8 +12,13 @@ export default () => (baseURL) => ({
     return profiles;
   },
   async create(payload) {
-    return await fetch(`${baseURL}`, payload, {
+    var form_data = new FormData();
+
+    Object.keys(payload).forEach((key) => form_data.append(key, payload[key]));
+
+    return await fetch(`${baseURL}`, {
       method: "POST",
+      body: form_data,
     });
   },
   async show(id) {
