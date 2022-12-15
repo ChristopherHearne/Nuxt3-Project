@@ -15,6 +15,9 @@
   </div>
 </template>
 <script>
+import { useProfileData } from '~~/stores/profiledata';
+
+
 export default {
   props: {
     user: Object,
@@ -56,6 +59,9 @@ export default {
       setCookie("active_user", JSON.stringify(results), 1);
       await navigateTo(`/myprofile/${results.profileName}`);
     },
+    handleChange(){
+      useProfileData().updateUserData(this.userData);
+    }
   },
 };
 </script>

@@ -2,6 +2,7 @@
   <form @submit.prevent="handleNext" class="field-container">
     <v-text-field
       label="Link to Facebook..."
+      @input="handleChange"
       class="text-field"
       type="url"
       hide-details="auto"
@@ -9,6 +10,7 @@
     />
     <v-text-field
       label="Link to Instagram..."
+      @input="handleChange"
       class="text-field"
       type="url"
       hide-details="auto"
@@ -16,6 +18,7 @@
     />
     <v-text-field
       label="Link to Github..."
+      @input="handleChange"
       class="text-field"
       type="url"
       hide-details="auto"
@@ -23,6 +26,7 @@
     />
     <v-text-field
       label="Link to LinkedIn..."
+      @input="handleChange"
       class="text-field"
       type="url"
       hide-details="auto"
@@ -30,6 +34,7 @@
     />
     <v-text-field
       label="Link to website/project..."
+      @input="handleChange"
       class="text-field"
       type="url"
       hide-details="auto"
@@ -39,6 +44,8 @@
 </template>
 
 <script>
+import { useProfileData } from '~~/stores/profiledata';
+
 export default {
   props: {
     user: Object,
@@ -49,8 +56,8 @@ export default {
 	}
   },
   methods: {
-    handleNext() {
-      // Logic to go to the next input section
+    handleChange() {
+      useProfileData().updateUserData(this.userData);
     },
   },
 };

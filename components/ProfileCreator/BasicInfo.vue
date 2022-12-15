@@ -3,12 +3,14 @@
     <v-text-field
       class="text-field"
       label="Firstname..."
+      @input="handleChange"
       v-model="userData.firstName"
       hide-details="auto"
       required
     />
     <v-text-field
       label="Lastname..."
+      @input="handleChange"
       class="text-field"
       v-model="userData.lastName"
       hide-details="auto"
@@ -16,6 +18,7 @@
     />
     <v-text-field
       label="Job title..."
+      @input="handleChange"
       class="text-field"
       v-model="userData.title"
       hide-details="auto"
@@ -23,6 +26,7 @@
     />
     <v-text-field
       label="Email..."
+      @input="handleChange"
       class="text-field"
       type="email"
       v-model="userData.email"
@@ -33,9 +37,10 @@
 </template>
 
 <script>
+
 export default {
   props: {
-    user: Object,
+    store: null,
   },
   data() {
     return {
@@ -43,8 +48,8 @@ export default {
     };
   },
   methods: {
-    handleNext() {
-      // Logic to go to the next input section
+    handleChange() {
+      this.store.updateUserData(this.userData);
     },
   },
 };
