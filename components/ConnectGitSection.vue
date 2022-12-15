@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="github-container">
-      <button @click="getGithubURL(activeUser.id)">
+      <button @click="getGithubURL(JSON.parse(this.activeUser).id)">
         <i class="fa-brands fa-github"></i>
         Connect to Github
       </button>
@@ -27,15 +27,18 @@ const getGithubURL = async(id) => {
   const qs = new URLSearchParams(options);
   return window.location.assign(`${rootURL}?${qs.toString()}`);
 }
-
 </script>
 <script>
+import { getCookie } from '~~/tools/cookieHandler';
 export default {
-  props: {
-    activeUser: {},
+  data(){
+    return {
+      activeUser: null
+    }
   },
-  methods: {
-  },
+  mounted(){
+    this.activeUser = getCookie("active_user")
+  }
 };
 </script>
 <style scoped>

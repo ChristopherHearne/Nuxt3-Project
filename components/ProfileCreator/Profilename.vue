@@ -17,6 +17,7 @@
 </template>
 <script>
 import { setCookie } from '~~/tools/cookieHandler';
+import { useNavigator } from '~~/stores/navigator';
 export default {
   props: {
     store: null,
@@ -57,7 +58,8 @@ export default {
       this.post.success = true;
       this.post.message = `${results.profileName} was created and added to the database successfully`;
       setCookie("active_user", JSON.stringify(results), 1);
-      await navigateTo(`/myprofile/${results.profileName}`);
+      useNavigator().nextNavstate(); 
+      // await navigateTo(`/myprofile/${results.profileName}`);
     },
   },
 };
