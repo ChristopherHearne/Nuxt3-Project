@@ -1,18 +1,20 @@
 <template>
   <div class="profile-name-container">
     <form @submit.prevent="handleSubmit">
-      <v-text-field
-        :class="{ error: error.set }"
-        class="text-field"
-        label="Profile name..."
-        type="text"
-        @input="this.store.user.profileName = this.profileName"
-        v-model="profileName"
-        required
-      />
-      <div class="error-msg" v-if="error.set">{{ error.message }}</div>
-      <button type="submit">Create my profile</button>
+      <div class="profile">
+        <v-text-field
+          :class="{ error: error.set }"
+          class="text-field"
+          label="Profile name..."
+          type="text"
+          @input="this.store.user.profileName = this.profileName"
+          v-model="profileName"
+          required
+        />
+        <button type="submit">Create my profile</button>
+      </div>
     </form>
+    <div class="error-msg" v-if="error.set">{{ error.message }}</div>
   </div>
 </template>
 <script>
@@ -59,7 +61,6 @@ export default {
       this.post.message = `${results.profileName} was created and added to the database successfully`;
       setCookie("active_user", JSON.stringify(results), 1);
       useNavigator().nextNavstate(); 
-      // await navigateTo(`/myprofile/${results.profileName}`);
     },
   },
 };
@@ -75,6 +76,13 @@ export default {
   border-color: red;
 }
 
+button{
+  color: #fff !important;
+  display: flex;
+  height: 40px;
+  width: 100%; 
+}
+
 .text-field {
   color: #fff !important;
   width: 100% !important;
@@ -86,5 +94,13 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.profile{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 </style>

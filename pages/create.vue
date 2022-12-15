@@ -5,7 +5,10 @@
 		  </div>
 	  <div class="inputs">
 		<component :store="profileStore" :is="stateComponents[navigator.currentNavstate]"></component>
-		<ProfileCreatorFooter />
+		<div class="steps">
+			<ProfileCreatorPreviousStep v-if="navigator.currentNavstate < 4"/>
+			<ProfileCreatorNextStep v-if="navigator.currentNavstate < 3" />
+		</div>
 	  </div>
 	</div>
   </template>
@@ -39,7 +42,7 @@
   }
   </script>
   <style scoped>
-  .form-container {
+.form-container {
 	margin-left: 10%;
 	display: flex;
 	justify-content: center;
@@ -48,9 +51,20 @@
 	width: 90%;
 }
 
+.steps{
+	display: flex; 
+	width: 100%;
+	height: auto;
+	align-items: center;
+	justify-content: space-between;
+}
 .state, .inputs{
 	animation: fadeInFromBottom 1s ease-in-out;
-  }
+}
+
+.inputs{
+	width: 30%;
+}
 
   @keyframes fadeInFromBottom{
   0%{

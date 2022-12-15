@@ -1,7 +1,6 @@
 <template>
 	<div class="btn-container">
 		<button @click.prevent="navigator.previousNavstate">Previous Step</button>
-		<button @click.prevent="navigator.nextNavstate">Next -></button>
 	</div>
 </template>
 <script setup>
