@@ -2,7 +2,7 @@
   <form @submit.prevent="handleNext" class="field-container">
     <v-text-field
       label="Link to Facebook..."
-      @input="handleChange"
+      @input="this.store.user.facebook = this.userData.facebook"
       class="text-field"
       type="url"
       hide-details="auto"
@@ -10,7 +10,7 @@
     />
     <v-text-field
       label="Link to Instagram..."
-      @input="handleChange"
+      @input="this.store.user.instagram = this.userData.instagram"
       class="text-field"
       type="url"
       hide-details="auto"
@@ -18,7 +18,7 @@
     />
     <v-text-field
       label="Link to Github..."
-      @input="handleChange"
+      @input="this.store.user.githbub = this.userData.github"
       class="text-field"
       type="url"
       hide-details="auto"
@@ -26,7 +26,7 @@
     />
     <v-text-field
       label="Link to LinkedIn..."
-      @input="handleChange"
+      @input="this.store.user.linkedin = this.userData.linkedin"
       class="text-field"
       type="url"
       hide-details="auto"
@@ -34,7 +34,7 @@
     />
     <v-text-field
       label="Link to website/project..."
-      @input="handleChange"
+      @input="this.store.user.website = this.userData.website"
       class="text-field"
       type="url"
       hide-details="auto"
@@ -44,21 +44,15 @@
 </template>
 
 <script>
-import { useProfileData } from '~~/stores/profiledata';
 
 export default {
   props: {
-    user: Object,
+    store: null,
   },
   data(){
 	return {
 		userData: {}
 	}
-  },
-  methods: {
-    handleChange() {
-      useProfileData().updateUserData(this.userData);
-    },
   },
 };
 </script>

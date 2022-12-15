@@ -2,14 +2,14 @@
   <form @submit.prevent="handleNext" class="field-container">
     <v-text-field
       label="Tell us a little about yourself"
-      @input="handleChange"
+      @input="this.store.user.about = this.userData.about"
       class="text-field"
       v-model="userData.about"
       required
     />
     <v-text-field
       label="Tell us about your interests"
-      @input="handleChange"
+      @input="this.store.user.interests = this.userData.interests"
       class="text-field"
       v-model="userData.interests"
       required
@@ -27,11 +27,6 @@ export default {
     return {
       userData: {},
     };
-  },
-  methods: {
-    handleChange() {
-      this.store.updateUserData(this.userData);
-    },
   },
 };
 </script>

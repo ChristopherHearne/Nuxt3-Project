@@ -6,7 +6,8 @@
         class="text-field"
         label="Profile name..."
         type="text"
-        v-model="userData.profileName"
+        @input="this.store.user.profileName = this.profileName"
+        v-model="profileName"
         required
       />
       <div class="error-msg" v-if="error.set">{{ error.message }}</div>
@@ -15,12 +16,10 @@
   </div>
 </template>
 <script>
-import { useProfileData } from '~~/stores/profiledata';
-
 
 export default {
   props: {
-    user: Object,
+    store: null,
   },
   data() {
     return {
@@ -32,12 +31,13 @@ export default {
         success: false,
         message: null,
       },
-	  userData: {}
+	    profileName: '', 
     };
   },
   methods: {
     async handleSubmit() {
-      const data = { ...this.user };
+      const data = {...this.store.getUserData()};
+      console.log(data)
       const response = await this.$profileRepository.create(data);
 
       if (!response.ok) {
@@ -59,9 +59,6 @@ export default {
       setCookie("active_user", JSON.stringify(results), 1);
       await navigateTo(`/myprofile/${results.profileName}`);
     },
-    handleChange(){
-      useProfileData().updateUserData(this.userData);
-    }
   },
 };
 </script>
