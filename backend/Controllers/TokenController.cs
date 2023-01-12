@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 
 namespace API_Test.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/tokens")]
     [ApiController]
     public class TokenController : ControllerBase
     {
@@ -24,7 +24,7 @@ namespace API_Test.Controllers
         }
 
         
-        [HttpGet("/github/oauth/generate/token")]
+        [HttpGet("generate")]
         [Consumes("application/json")]
         [Produces("application/json")]
         public async Task<ActionResult> GitHubSignInData([FromQuery] String code, [FromQuery] int id)
