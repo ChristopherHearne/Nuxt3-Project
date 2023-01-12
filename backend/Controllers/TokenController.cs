@@ -23,7 +23,8 @@ namespace API_Test.Controllers
             Configuration = config; 
         }
 
-        
+        // GET: api/tokens/generate
+        // Uses generated Github OAUTH code to get access token
         [HttpGet("generate")]
         [Consumes("application/json")]
         [Produces("application/json")]
@@ -66,8 +67,8 @@ namespace API_Test.Controllers
 
         }
 
-
-        [HttpGet("/tokens")]
+        // GET: api/tokens
+        [HttpGet]
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<Token>>> GetTokens()
         {
@@ -75,7 +76,8 @@ namespace API_Test.Controllers
             return Ok(list);
         }
 
-        [HttpGet("/tokens/{id}")]
+        // GET: api/tokens/{id}
+        [HttpGet("{id}")]
         public async Task<ActionResult<Token>> GetToken(int id)
         {
             var token = await _context.Tokens.FindAsync(id);
@@ -86,7 +88,8 @@ namespace API_Test.Controllers
             return token;
         }
 
-        [HttpGet("/tokens/profile/")]
+        // GET: api/tokens/profile/{profileID}
+        [HttpGet("profile/{profileID}")]
         public async Task<ActionResult<Token>> GetTokenByProfileId([FromQuery]int profileID)
         {
             var token = await _context.Tokens.FirstOrDefaultAsync(e => e.ProfileId == profileID);
@@ -97,7 +100,8 @@ namespace API_Test.Controllers
             return token;
         }
 
-        [HttpPost("/tokens")]
+        // POST: api/tokens
+        [HttpPost]
         [Consumes("application/json")]
         [Produces("application/json")]
         public async Task<ActionResult<Token>> PostToken([FromQuery] Token token)
@@ -107,7 +111,8 @@ namespace API_Test.Controllers
             return CreatedAtAction("GetToken", new { id = token.Id }, token);
         }
 
-        [HttpDelete("/tokens/delete/{id}")]
+        // DELETE: api/tokens/{id}
+        [HttpDelete("{id}")]
         public async Task<ActionResult<Token>> DeleteToken(int id)
         {
             var token = await _context.Tokens.FindAsync(id);
@@ -122,6 +127,7 @@ namespace API_Test.Controllers
             return token;
         }
 
+        // Generates a random base64 that is used to create a unique oauth grouping. For security purposes, this should be changed to a more secure random string generator
         private static string GetRandomString(int count)
         {
             return Convert.ToBase64String(RandomNumberGenerator.GetBytes(count)); 
