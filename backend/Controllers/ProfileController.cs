@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API_Test.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/profiles")]
     [ApiController]
     public class ProfileController : ControllerBase
     {
@@ -17,8 +17,8 @@ namespace API_Test.Controllers
             _context = context;
         }
 
-        // GET: api/Profile/profiles
-        [HttpGet("profiles")]
+        // GET: api/profiles
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<Profile>>> GetProfiles()
         {
             var list = await _context.Profiles.ToListAsync<Profile>();
@@ -26,7 +26,7 @@ namespace API_Test.Controllers
         }
 
 
-        // GET: api/Profile/5
+        // GET: api/profiles/{id}
         [HttpGet("{id}")]
         [Produces("application/json")]
         public async Task<ActionResult<Profile>> GetProfile(int id)
@@ -41,7 +41,7 @@ namespace API_Test.Controllers
             return profiles;
         }
 
-        [HttpGet("profiles/authenticated")]
+        [HttpGet("authenticated")]
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<Profile>>> GetAuthenticatedProfiles()
         {
@@ -55,7 +55,7 @@ namespace API_Test.Controllers
             return profiles; 
         }
 
-        [HttpGet("profiles/{name}")]
+        [HttpGet("name/{name}")]
         [Produces("application/json")]
         public async Task<ActionResult<Profile>> GetProfileByName(String name)
         {

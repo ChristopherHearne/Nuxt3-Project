@@ -22,7 +22,7 @@ export default () => (baseURL) => ({
 		return await response.json();
 	}, 
 	async delete(id){
-		return await fetch(`${baseURL}/delete/ ${id}`, {
+		return await fetch(`${baseURL}/${id}`, {
 			method: 'DELETE'
 		})
 	}

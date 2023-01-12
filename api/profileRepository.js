@@ -1,13 +1,13 @@
 export default () => (baseURL) => ({
   async index() {
-    const { data: profiles } = await useFetch(`${baseURL}/profiles`, {
+    const { data: profiles } = await useFetch(`${baseURL}`, {
       method: "GET",
     });
     return profiles;
   },
   async getAuthenticatedProfiles() {
     const { data: profiles } = await useFetch(
-      `${baseURL}/profiles/authenticated`
+      `${baseURL}/authenticated`
     );
     return profiles;
   },
@@ -29,7 +29,7 @@ export default () => (baseURL) => ({
   },
   async showByName(profileName) {
     const { data: profile } = await useFetch(
-      `${baseURL}/profiles/${profileName}`,
+      `${baseURL}/name/${profileName}`,
       { method: "get", initialCache: false }
     );
     return profile;
